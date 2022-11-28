@@ -337,21 +337,21 @@
 
     login = () => {
         var req = {
-            Tentaikhoan: $('#username').val(),
-            Matkhau: $('#password').val(),
+            UserName: $('#username').val(),
+            Password: $('#password').val(),
         }
-        postData('../TaiKhoan/Login', req)
+        postData('../Account/Login', req)
             .then((data) => {
                 console.log(data);
                 if (data.success) {
                     var userInfo = {
-                        Id_Taikhoan: data.data.Id_Taikhoan,
-                        Maloai: data.data.Maloai.trim(),
-                        Tentaikhoan: data.data.Tentaikhoan.trim(),
+                        AccountId: data.data.AccountId,
+                        AccountType: data.data.AccountType,
+                        UserName: data.data.UserName,
                         Token: data.token
                     };
                     localStorage.setItem("UserInfo", JSON.stringify(userInfo));
-                    if (userInfo.Maloai == '01' || userInfo.Maloai == '03') {
+                    if (AccountType.Maloai == 1 || AccountType.Maloai == 3) {
                         toastr.success('Successfully !');
                         window.location.assign('../Dashboard/Index');
                     }

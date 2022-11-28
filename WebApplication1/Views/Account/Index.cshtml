@@ -4,7 +4,6 @@
     Layout = "~/Views/Shared/AdminLayout/_Main.cshtml";
 }
 
-
 <link rel="stylesheet" type="text/css" href="https://cdn.datatables.net/1.12.1/css/jquery.dataTables.css">
 <script type="text/javascript" charset="utf8" src="https://cdn.datatables.net/1.12.1/js/jquery.dataTables.js"></script>
 
@@ -14,11 +13,8 @@
         <div class="page-inner py-5">
             <div class="d-flex align-items-left align-items-md-center flex-column flex-md-row">
                 <div>
-                    <h2 class="text-white pb-2 fw-bold">Khách sạn</h2>
-                    <h5 class="text-white op-7 mb-2">Trang chủ/Admin/Khách sạn</h5>
-                </div>
-                <div class="ml-md-auto py-2 py-md-0">
-                    <a href="#" class="btn btn-secondary btn-round" data-toggle="modal" data-target="#addModal" onclick="openAddModal()">Thêm mới</a>
+                    <h2 class="text-white pb-2 fw-bold">Tài khoản</h2>
+                    <h5 class="text-white op-7 mb-2">Trang chủ/Admin/Tài khoản</h5>
                 </div>
             </div>
         </div>
@@ -31,29 +27,47 @@
                         <div class="row">
                             <div class="col-md-12">
                                 <div class="table-responsive table-hover table-sales">
-                                    <table id="dt_table" class="display">
+                                    <table id="table_tglv" class="display">
                                         <thead>
                                             <tr>
                                                 <th>Mã</th>
-                                                <th>Tên khách sạn</th>
-                                                <th>Loại phòng</th>
-                                                <th>Số tiền/ Người</th>
+                                                <th>Tên tài khoản</th>
+                                                <th>Email</th>
+                                                <th>Số điện thoại</th>
+                                                <th>Số dư</th>
+                                                <th>Loại tài khoản</th>
                                                 <th>Hành động</th>
                                             </tr>
                                         </thead>
                                         <tbody>
-                                            @foreach (var m in @ViewBag.ListHotel)
+                                            @foreach (var m in @ViewBag.ListAccount)
                                             {
                                                 <tr>
-                                                    <td>@m.HotelId</td>
-                                                    <td>@m.HotelName</td>
-                                                    <td>@m.TypeRoom Người</td>
-                                                    <td>@m.PricePerOne</td>
+                                                    <td>@m.AccountId</td>
+                                                    <td>@m.UserName</td>
+                                                    <td>@m.Email</td>
+                                                    <td>@m.Phone</td>
+                                                    <td>@m.Balance</td>
+                                                    @if (m.AccountType == 1)
+                                                    {
+                                                        <td>ADMIN</td>
+
+                                                    }
+                                                    else if (m.AccountType == 2)
+                                                    {
+                                                        <td>KHÁCH HÀNG</td>
+
+                                                    }
+                                                    else
+                                                    {
+                                                        <td>NHÂN VIÊN</td>
+
+                                                    }
                                                     <td>
-                                                        <button class="btn btn-outline-info btn-sm" data-toggle="modal" data-target="#addModal" style="margin-right: 5px;" onclick="openUpdateModal(@m.HotelId)">
+                                                        <button class="btn btn-outline-info btn-sm" data-toggle="modal" data-target="#addModal" style="margin-right: 5px;" onclick="openUpdateModal(@m.AccountId)">
                                                             <i class="fas fa-edit"></i>
                                                         </button>
-                                                        <button class="btn btn-outline-danger btn-sm" onclick="openDeleteModal(@m.HotelId)" style="margin-right: 5px;" data-toggle="modal" data-target="#deleteModal">
+                                                        <button class="btn btn-outline-danger btn-sm" onclick="openDeleteModal(@m.AccountId)" data-toggle="modal" data-target="#deleteModal">
                                                             <i class="fas fa-trash-alt"></i>
                                                         </button>
                                                     </td>
@@ -84,22 +98,20 @@
             </div>
             <div class="modal-body">
                 <div class="col-md-12">
-                    <form id="bouqueti-form">
-                        <div class="form-row">
-                            <div class="form-group col-md-12">
-                                <label class="required" for="inputEmail4">Tên khách sạn</label>
-                                <input type="text" class="form-control contact-method" id="HotelName" placeholder="Nhập tên">
-                            </div>
-                            <div class="form-group col-md-12">
-                                <label class="required" for="inputEmail4">Loại phòng</label>
-                                <input type="text" class="form-control contact-method" id="TypeRoom" placeholder="Nhập loại">
-                            </div>
-                            <div class="form-group col-md-12">
-                                <label class="required" for="inputEmail4">Số tiền/ Người</label>
-                                <input type="text" class="form-control contact-method" id="PricePerOne" placeholder="Nhập số tiền">
-                            </div>
+                    <div class="row">
+                        <div class="infoForm form-group col-md-6">
+                            <label class="required" for="inputEmail4">Email</label>
+                            <input type="text" class="form-control contact-method" id="Email" placeholder="Email">
                         </div>
-                    </form>
+                        <div class="infoForm form-group col-md-6">
+                            <label class="required" for="inputEmail4">Số điện thoại</label>
+                            <input type="text" class="form-control contact-method" id="Phone" placeholder="Số điện thoại">
+                        </div>
+                        <div class="infoForm form-group col-md-6">
+                            <label class="required" for="inputEmail4">Số dư</label>
+                            <input type="text" class="form-control contact-method" id="Balance" placeholder="Số dư">
+                        </div>
+                    </div>
                 </div>
             </div>
             <div class="modal-footer">
@@ -137,9 +149,9 @@
 
     openAddModal = () => {
         id_record = 0;
-        $('#HotelName').val('');
-        $('#TypeRoom').val('');
-        $('#PricePerOne').val('');
+        $('#Email').val('');
+        $('#Phone').val('');
+        $('#Balance').val('');
     };
 
     // Example POST method implementation:
@@ -162,18 +174,18 @@
     }
 
     $(document).ready(function () {
-        $('#dt_table').DataTable();
+        $('#table_tglv').DataTable();
     });
 
     submit = () => {
         var req = {
-            HotelId: id_record,
-            HotelName: $('#HotelName').val(),
-            TypeRoom: $('#TypeRoom').val(),
-            PricePerOne: $('#PricePerOne').val(),
+            AccountId: id_record,
+            Email: $('#Email').val(),
+            Phone: $('#Phone').val(),
+            Balance: $('#Balance').val(),
         }
 
-        postData('/Hotel/Save', req)
+        postData('/Account/Save', req)
             .then((data) => {
                 if (data.success) {
                     toastr.success('Successfully !');
@@ -194,13 +206,13 @@
     openUpdateModal = (id) => {
         id_record = id;
         $.ajax({
-            url: '/Hotel/FindById?id=' + id,
+            url: '/Account/FindById?id=' + id,
             type: 'GET',
             success: function (result) {
                 if (result.success) {
-                    $('#HotelName').val(result.data.HotelName);
-                    $('#TypeRoom').val(result.data.TypeRoom);
-                    $('#PricePerOne').val(result.data.PricePerOne);
+                    $('#Email').val(result.data.Email);
+                    $('#Phone').val(result.data.Phone);
+                    $('#Balance').val(result.data.Balance);
                 }
                 else {
                     toastr.warning('Failed !');
@@ -212,7 +224,7 @@
 
     deleteItem = () => {
         $.ajax({
-            url: '/Hotel/Delete?id=' + id_record,
+            url: '/Account/Delete?id=' + id_record,
             type: 'GET',
             success: function (result) {
                 if (result.success) {
@@ -229,6 +241,5 @@
     }
 
 </script>
-
 
 
