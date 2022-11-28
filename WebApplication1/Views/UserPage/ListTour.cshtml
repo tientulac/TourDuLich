@@ -12,6 +12,49 @@
                 Tour du lịch
             </h2>
         </div>
+        <div class="col-md-12">
+            <div class="row">
+                <div class="col-md-4">
+                    <label style="font-weight: bold">Tên tour</label>
+                    <input class="form-control" type="text" name="name" value="" placeholder="Tên tour" />
+                </div>
+                <div class="col-md-2">
+                    <label style="font-weight: bold">Ngày bắt đầu</label>
+
+                    <input class="form-control" type="date" name="name" value="" />
+                </div>
+                <div class="col-md-2">
+                    <label style="font-weight: bold">Ngày kết thúc</label>
+
+                    <input class="form-control" type="date" name="name" value="" />
+                </div>
+                <div class="col-md-4">
+                    <label style="font-weight: bold">Giá</label>
+
+                    <select class="form-control">
+                        <option value="" selected>Chọn mức giá</option>
+                        <option value="ADSC">Tăng dần</option>
+                        <option value="ADSC">Giảm dần</option>
+                    </select>
+                </div>
+                <div style="margin-top: 10px;" class="col-md-4">
+                    <label style="font-weight: bold">Điểm đi</label>
+
+                    <input class="form-control" type="text" name="name" value="" placeholder="Điểm đi" />
+                </div>
+                <div style="margin-top: 10px;" class="col-md-4">
+                    <label style="font-weight: bold">Điểm đến</label>
+
+                    <input class="form-control" type="text" name="name" value="" placeholder="Điểm đến" />
+                </div>
+                <div style="margin-top: 10px;" class="col-md-4">
+                    <label style="font-weight: bold">Phương tiện di chuyển</label>
+
+                    <input class="form-control" type="text" name="name" value="" placeholder="Phương tiện di chuyển" />
+                </div>
+
+            </div>
+        </div>
         <div class="news_container col-md-12">
             <div class="row">
                 @foreach (var m in @ViewBag.ListTour)
