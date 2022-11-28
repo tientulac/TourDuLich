@@ -1,0 +1,54 @@
+﻿
+@{
+    ViewBag.Title = "ListTour";
+    Layout = "~/Views/Shared/UserLayout/_Main.cshtml";
+}
+
+<section class="news_section layout_padding">
+    <div class="container">
+        <div class="heading_container">
+            <h2>
+                Danh sách <br>
+                Tour du lịch
+            </h2>
+        </div>
+        <div class="news_container col-md-12">
+            <div class="row">
+                @foreach (var m in @ViewBag.ListTour)
+                {
+                    <a href="/UserPage/TourDetail?tourId=@m.TourId" class="box col-md-4" style="margin-top: 15px; color: black;">
+                        <div class="date-box">
+                            <h6>
+                                @m.TourTime
+                            </h6>
+                        </div>
+                        <div class="img-box">
+                            <img src="@m.Poster" alt="" width="300" height="200">
+                        </div>
+                        <div class="detail-box">
+                            <h6>
+                                @m.TourName
+                            </h6>
+                            <p>
+                                <b>Thời gian:</b> @m.StartDate - @m.EndDate
+                            </p>
+                            <p>
+                                <b>Lịch trình:</b>: @m.LocationFrom - @m.LocationTo
+                            </p>
+                            <p>
+                                <b>Giá:</b>: @m.Price
+                            </p>
+                            <p>
+                                <b>Phương tiện di chuyển:</b> @m.VehicleName
+                            </p>
+                            <br>
+                            <p>
+                                Có nhân viên phục vụ đồ ăn, đồ uống trong suốt chuyến bay. (Mọi chi phí đã được tính vào giá tour).
+                            </p>
+                        </div>
+                    </a>
+                }
+            </div>
+        </div>
+    </div>
+</section>

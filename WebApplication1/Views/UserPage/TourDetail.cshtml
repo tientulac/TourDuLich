@@ -1,0 +1,154 @@
+﻿
+@{
+    ViewBag.Title = "TourDetail";
+    Layout = "~/Views/Shared/UserLayout/_Main.cshtml";
+}
+
+<style>
+    p {
+        margin: 0 0 13px 0;
+    }
+
+    a {
+        color: #fff;
+    }
+
+    .center {
+        text-align: center;
+    }
+
+    .container {
+        width: 95%;
+        max-width: 1220px;
+        margin: 0 auto;
+    }
+
+    .episode {
+        display: grid;
+        grid-template-columns: 1fr 3fr;
+        position: relative;
+    }
+
+    .episode__number {
+        font-size: 3vw;
+        font-weight: 600;
+        padding: 10px 0;
+        position: sticky;
+        top: 0;
+        text-align: center;
+        height: calc(10vw + 20px);
+        transition: all 0.2s ease-in;
+    }
+
+    .episode__content {
+        border-top: 2px solid #fff;
+        display: grid;
+        grid-template-columns: 1fr 4fr;
+        grid-gap: 10px;
+        padding: 15px 0;
+    }
+
+        .episode__content .title {
+            font-weight: 600
+        }
+
+        .episode__content .story {
+            line-height: 26px;
+        }
+
+    @@media (max-width: 600px) {
+        .episode__content {
+            grid-template-columns: 1fr;
+        }
+    }
+
+    @@media (max-width: 576px) {
+        .episode__content .story {
+            font-size: 15px;
+        }
+    }
+</style>
+
+
+<section class="news_section layout_padding">
+    <div class="container">
+        <div class="heading_container">
+            <h2>
+                @ViewBag.Tour.TourName
+            </h2>
+        </div>
+        <div class="news_container col-md-12">
+            <div class="row">
+                <div class="box" style="margin-top: 15px; color: black;">
+                    <div class="date-box">
+                        <h6>
+                            @ViewBag.Tour.TourTime
+                        </h6>
+                    </div>
+                    <div class="img-box">
+                        <img src="@ViewBag.Tour.Poster" alt="" width="300" height="200">
+                    </div>
+                    <div class="detail-box">
+                        <h6>
+                            @ViewBag.Tour.TourName
+                        </h6>
+                        <p>
+                            <b>Thời gian:</b> @ViewBag.Tour.StartDate - @ViewBag.Tour.EndDate
+                        </p>
+                        <p>
+                            <b>Lịch trình:</b>: @ViewBag.Tour.LocationFrom - @ViewBag.Tour.LocationTo
+                        </p>
+                        <p>
+                            <b>Giá:</b>: @ViewBag.Tour.Price
+                        </p>
+                        <p>
+                            <b>Phương tiện di chuyển:</b> @ViewBag.Tour.VehicleName
+                        </p>
+                        <br>
+                        <a href="/UserPage/BookingTicket?id=@m.ViewBag.Tour.TourId" style="float:right" class="btn btn-primary">Đặt vé ngay</a>
+                    </div>
+                </div>
+            </div>
+        </div>
+        <details>
+            <summary>Hình ảnh</summary>
+            <p>
+                <div class="container">
+                    @foreach (var m in @ViewBag.TourImage)
+                    {
+                        <article class="episode">
+                            <div class="episode__content">
+                                <div class="story">
+                                    <img src="@m.Image" alt="Alternate Text" />
+                                </div>
+                            </div>
+                        </article>
+                    }
+                </div>
+            </p>
+        </details>
+        <details>
+            <summary>Lịch trình</summary>
+            <p>
+                <div class="container">
+                    <h1 class="center">@ViewBag.Tour.TourName</h1>
+                    @foreach (var m in @ViewBag.TourSchedule)
+                    {
+                        <article class="episode">
+                            <div class="episode__number">Ngày @m.NumDay</div>
+                            <div class="episode__content">
+                                <div class="story">
+                                    <p style="text-align: center">@m.TourScheduleName</p>
+                                    <img src="@m.Image" alt="Alternate Text" />
+                                    <p>@m.Descrip</p>
+                                </div>
+                            </div>
+                        </article>
+                    }
+                </div>
+            </p>
+        </details>
+    </div>
+</section>
+
+

@@ -4,7 +4,7 @@
         <nav class="navbar navbar-expand-lg custom_nav-container ">
             <a class="navbar-brand" href="index.html">
                 <span>
-                    BusStop
+                    ĐẶT VÉ TOUR DU LỊCH
                 </span>
             </a>
             <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarSupportedContent" aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
@@ -18,20 +18,20 @@
                             <a class="nav-link" href="/UserPage/Index"> Trang chủ</a>
                         </li>
                         <li class="nav-item">
-                            <a class="nav-link" href="/UserPage/TramXe"> Trạm Xe </a>
+                            <a class="nav-link" href="/UserPage/ListLocation"> Địa điểm </a>
                         </li>
                         <li class="nav-item">
-                            <a class="nav-link" href="/UserPage/TuyenXe"> Tuyến Xe</a>
+                            <a class="nav-link" href="/UserPage/ListTour"> Danh sách tour </a>
                         </li>
                         <li class="nav-item">
-                            <a class="nav-link" href="/UserPage/DatVe"> Mua Vé</a>
+                            <a class="nav-link" href="/UserPage/ListHotel"> Khách sạn</a>
                         </li>
                         <li class="nav-item" id="notLogin">
                             <a class="nav-link" href="javascript:void(0)" data-toggle="modal" data-target="#loginModal">Đăng nhập</a>
                         </li>
                         <li class="nav-item row" id="login">
-                            <a class="nav-link"  href="javascript:void(0)" onclick="seeHoadon()" ><i class="fa fa-user"></i></a>
-                            <a class="nav-link"  href="javascript:void(0)" onclick="seeHoadon()" id="us_login"></a>
+                            <a class="nav-link" href="javascript:void(0)" onclick="seeHoadon()"><i class="fa fa-user"></i></a>
+                            <a class="nav-link" href="javascript:void(0)" onclick="seeHoadon()" id="us_login"></a>
                             <a class="nav-link" href="javascript:void(0)"><i class="fa-solid fa-right-from-bracket" onclick="logout()"></i></a>
                         </li>
                     </ul>
@@ -78,7 +78,7 @@
 
 <script>
     seeHoadon = () => {
-        var id_tk = JSON.parse(localStorage.getItem('UserInfo')).Id_Taikhoan;
+        var id_tk = JSON.parse(localStorage.getItem('UserInfo')).AccountId;
         window.location.href = '/UserPage/DanhsachVe?id_TK=' + id_tk;
     }
 
@@ -87,7 +87,7 @@
         if (info) {
             $('#login').show();
             $('#notLogin').hide();
-            $('#us_login').text(JSON.parse(localStorage.getItem('UserInfo')).Tentaikhoan);
+            $('#us_login').text(JSON.parse(localStorage.getItem('UserInfo')).UserName);
         }
         else {
             $('#login').hide();
@@ -126,18 +126,20 @@
 
     register = () => {
         var req = {
-            Ten: $('#Ten').val(),
-            Ngaysinh: $('#Ngaysinh').val(),
+            CustomerName: $('#CustomerName').val(),
+            DOB: $('#DOB').val(),
+            PassPortCode: $('#PassPortCode').val(),
+            Gender: $('#Gender').val(),
+            Address: $('#Address').val(),
+            UserName: $('#UserName').val(),
+            Password: $('#Password').val(),
             Email: $('#Email').val(),
-            CCCD: $('#CCCD').val(),
-            TheHSSV: $('#TheHSSV').val(),
-            Diachi: $('#Diachi').val(),
-            Tentaikhoan: $('#Tentaikhoan').val(),
-            Matkhau: $('#Matkhau').val(),
-            Sodienthoai: $('#Sodienthoai').val(),
+            Phone: $('#Phone').val(),
+            Admin: false,
+            Active: true,
         }
 
-        postData('../KhachHang/Register', req)
+        postData('../Customer/Register', req)
             .then((data) => {
                 console.log(data);
                 if (data.success) {
@@ -145,26 +147,26 @@
                     window.location.reload();
                 }
                 else {
-                    toastr.warning('Wrong password or username !');
+                    toastr.warning('Failed !');
                 }
             });
     }
 
     login = () => {
         var req = {
-            Tentaikhoan: $('#username').val(),
-            Matkhau: $('#password').val(),
+            UserName: $('#username').val(),
+            Password: $('#password').val(),
         }
-        postData('../TaiKhoan/Login', req)
+        postData('../Account/Login', req)
             .then((data) => {
                 console.log(data);
                 if (data.success) {
                     var userInfo = {
-                        Id_Taikhoan: data.data.Id_Taikhoan,
-                        Maloai: data.data.Maloai.trim(),
-                        Tentaikhoan: data.data.Tentaikhoan.trim(),
+                        AccountId: data.data.AccountId,
+                        AccountType: data.data.AccountType,
+                        UserName: data.data.UserName,
                         Token: data.token,
-                        Sodu: data.data.Sodu
+                        Balance: data.data.Balance
                     };
                     localStorage.setItem("UserInfo", JSON.stringify(userInfo));
                     toastr.success('Successfully !');
