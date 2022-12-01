@@ -1,4 +1,5 @@
-﻿ using System;
+﻿using Newtonsoft.Json;
+using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Web;
@@ -19,21 +20,28 @@ namespace WebApplication1.Controllers
         }
 
         [HttpPost]
-        public ActionResult BuyTicket(TicketDTO req)
+        public ActionResult BuyTicket(OrderDTO req)
         {
-            ViewBag.ListTour = db.Tours.ToList();
-
             var customerId = db.Customers.Where(x => x.AccountId == req.AccountId).FirstOrDefault().CustomerId;
+
+            req.CreatedAt = DateTime.Now;
+            req.QRCode = JsonConvert.SerializeObject(req);
+            req.CustomerId = customerId;
+
             var _order = new Order();
-            _order.TicketId = req.TicketId;
-            _order.Status = 1;
+            _order.Status = req.Status;
             _order.CreatedAt = DateTime.Now;
-            _order.QRCode = "{ success = true, TicketId =" + req.TicketId + ", OrderId = " + _order.OrderId + ", AccountId = " + req.AccountId + "}";
+            _order.QRCode = req.QRCode;
+            _order.CustomerId = req.CustomerId;
+            _order.TotalPrice = req.TotalPrice;
+            _order.TicketGrowup = req.TicketGrowup;
+            _order.TicketChild = req.TicketChild;
+            _order.TourId = req.TourId;
             db.Orders.InsertOnSubmit(_order);
             db.SubmitChanges();
 
             var tk = db.Accounts.Where(x => x.AccountId == req.AccountId).FirstOrDefault();
-            tk.Balance -= req.Price;
+            tk.Balance -= req.TotalPrice;
             db.SubmitChanges();
 
             return Json(new { success = true }, JsonRequestBehavior.AllowGet);
@@ -116,6 +124,7 @@ namespace WebApplication1.Controllers
                              VehicleName = db.Vehicles.Where(x => x.VehicleId == a.VehicleId).FirstOrDefault().VahicleName ?? "",
                          }).FirstOrDefault();
             ViewBag.Tour = _tour;
+            ViewBag.TourId = id;
             ViewBag.ListTicket = db.Tickets.ToList();
             return View();
         }
@@ -124,6 +133,24 @@ namespace WebApplication1.Controllers
         {
             var _location = db.Locations.Where(x => x.LocationId == id).FirstOrDefault();
             return Json(new { success = true, data = _location }, JsonRequestBehavior.AllowGet);
+        }
+
+        public ActionResult ListTicket(int account_id)
+        {
+            var ma = db.Customers.Where(x => x.AccountId == account_id).FirstOrDefault().CustomerId;
+            ViewBag.ListTicket = db.Orders.ToList() ?? null;
+            ViewBag.Customer = db.Customers.Where(x => x.AccountId == account_id).FirstOrDefault() ?? null;
+            ViewBag.Balance = db.Accounts.Where(x => x.AccountId == account_id).FirstOrDefault().Balance ?? 0;
+            return View();
+        }
+
+        public ActionResult NapTien(int id_tk)
+        {
+            var tk = db.Accounts.Where(x => x.AccountId == id_tk).FirstOrDefault();
+            tk.Balance = tk.Balance > 0 ? tk.Balance : 0;
+            tk.Balance += 50000;
+            db.SubmitChanges();
+            return Json(new { success = true }, JsonRequestBehavior.AllowGet);
         }
     }
 }

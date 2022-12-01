@@ -764,6 +764,7 @@
     <Content Include="Views\UserPage\ListLocation.cshtml" />
     <Content Include="Views\UserPage\ListTour.cshtml" />
     <Content Include="Views\UserPage\TourDetail.cshtml" />
+    <Content Include="Views\UserPage\ListTicket.cshtml" />
   </ItemGroup>
   <ItemGroup>
     <Folder Include="App_Data\" />

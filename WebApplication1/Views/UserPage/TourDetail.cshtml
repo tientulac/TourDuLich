@@ -105,7 +105,7 @@
                             <b>Phương tiện di chuyển:</b> @ViewBag.Tour.VehicleName
                         </p>
                         <br>
-                        <a href="/UserPage/BookingTicket?id=@ViewBag.Tour.TourId" style="float:right" class="btn btn-primary">Đặt vé ngay</a>
+                        <a href="javascript:void(0)" style="float:right" class="btn btn-primary" onclick="bookingTicket(@ViewBag.Tour.TourId)">Đặt vé ngay</a>
                     </div>
                 </div>
             </div>
@@ -152,3 +152,13 @@
 </section>
 
 
+<script>
+    bookingTicket = (id) => {
+        if (localStorage.getItem('UserInfo')) {
+            window.location.href = '/UserPage/BookingTicket?id=' + id;
+        }
+        else {
+            toastr.warning('Bạn cần đăng nhập để thực hiện thao tác này !');
+        }
+    }
+</script>

@@ -79,7 +79,7 @@
 <script>
     seeHoadon = () => {
         var id_tk = JSON.parse(localStorage.getItem('UserInfo')).AccountId;
-        window.location.href = '/UserPage/DanhsachVe?id_TK=' + id_tk;
+        window.location.href = '/UserPage/ListTicket?account_id=' + id_tk;
     }
 
     getInfo = () => {

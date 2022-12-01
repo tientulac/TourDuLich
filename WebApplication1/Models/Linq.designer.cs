@@ -1246,6 +1246,14 @@ namespace WebApplication1.Models
 		
 		private System.Nullable<int> _CustomerId;
 		
+		private System.Nullable<decimal> _TotalPrice;
+		
+		private System.Nullable<int> _TicketGrowup;
+		
+		private System.Nullable<int> _TicketChild;
+		
+		private System.Nullable<int> _TourId;
+		
     #region Extensibility Method Definitions
     partial void OnLoaded();
     partial void OnValidate(System.Data.Linq.ChangeAction action);
@@ -1264,6 +1272,14 @@ namespace WebApplication1.Models
     partial void OnQRCodeChanged();
     partial void OnCustomerIdChanging(System.Nullable<int> value);
     partial void OnCustomerIdChanged();
+    partial void OnTotalPriceChanging(System.Nullable<decimal> value);
+    partial void OnTotalPriceChanged();
+    partial void OnTicketGrowupChanging(System.Nullable<int> value);
+    partial void OnTicketGrowupChanged();
+    partial void OnTicketChildChanging(System.Nullable<int> value);
+    partial void OnTicketChildChanged();
+    partial void OnTourIdChanging(System.Nullable<int> value);
+    partial void OnTourIdChanged();
     #endregion
 		
 		public Order()
@@ -1407,6 +1423,86 @@ namespace WebApplication1.Models
 					this._CustomerId = value;
 					this.SendPropertyChanged("CustomerId");
 					this.OnCustomerIdChanged();
+				}
+			}
+		}
+		
+		[global::System.Data.Linq.Mapping.ColumnAttribute(Storage="_TotalPrice", DbType="Decimal(18,0)")]
+		public System.Nullable<decimal> TotalPrice
+		{
+			get
+			{
+				return this._TotalPrice;
+			}
+			set
+			{
+				if ((this._TotalPrice != value))
+				{
+					this.OnTotalPriceChanging(value);
+					this.SendPropertyChanging();
+					this._TotalPrice = value;
+					this.SendPropertyChanged("TotalPrice");
+					this.OnTotalPriceChanged();
+				}
+			}
+		}
+		
+		[global::System.Data.Linq.Mapping.ColumnAttribute(Storage="_TicketGrowup", DbType="Int")]
+		public System.Nullable<int> TicketGrowup
+		{
+			get
+			{
+				return this._TicketGrowup;
+			}
+			set
+			{
+				if ((this._TicketGrowup != value))
+				{
+					this.OnTicketGrowupChanging(value);
+					this.SendPropertyChanging();
+					this._TicketGrowup = value;
+					this.SendPropertyChanged("TicketGrowup");
+					this.OnTicketGrowupChanged();
+				}
+			}
+		}
+		
+		[global::System.Data.Linq.Mapping.ColumnAttribute(Storage="_TicketChild", DbType="Int")]
+		public System.Nullable<int> TicketChild
+		{
+			get
+			{
+				return this._TicketChild;
+			}
+			set
+			{
+				if ((this._TicketChild != value))
+				{
+					this.OnTicketChildChanging(value);
+					this.SendPropertyChanging();
+					this._TicketChild = value;
+					this.SendPropertyChanged("TicketChild");
+					this.OnTicketChildChanged();
+				}
+			}
+		}
+		
+		[global::System.Data.Linq.Mapping.ColumnAttribute(Storage="_TourId", DbType="Int")]
+		public System.Nullable<int> TourId
+		{
+			get
+			{
+				return this._TourId;
+			}
+			set
+			{
+				if ((this._TourId != value))
+				{
+					this.OnTourIdChanging(value);
+					this.SendPropertyChanging();
+					this._TourId = value;
+					this.SendPropertyChanged("TourId");
+					this.OnTourIdChanged();
 				}
 			}
 		}

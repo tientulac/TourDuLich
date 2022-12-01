@@ -11,6 +11,7 @@
         <div class="heading_container">
             <h2>
                 Đặt vé trực tuyến<br>
+                ----@ViewBag.Tour.TourName----
             </h2>
         </div>
     </div>
@@ -19,22 +20,41 @@
             <div class="col-md-5  offset-md-1">
                 <div class="contact_form">
                     <h4>
-                        Chọn tuyến xe
+                        Tham khảo vé
                     </h4>
                     <form>
-                        <select class="form-control form-control-lg" style="width: 100%" id="select_tuyen">
-                            <option selected>Chọn tuyến xe</option>
+                        <select class="form-control form-control-lg" style="width: 100%" id="select_ticket">
+                            <option selected>Chọn loại vé</option>
                             @foreach (var m in @ViewBag.ListTicket)
                             {
-                                <option value="@m.TicketId">@m.T</option>
+                                if (m.TicketType == 1)
+                                {
+                                    <option value="@m.TicketId">Vé trẻ em - @m.Price</option>
+
+                                }
+                                else if (m.TicketType == 2)
+                                {
+                                    <option value="@m.TicketId">Vé người lớn - @m.Price</option>
+
+                                }
+                                else if (m.TicketType != 1 && m.TicketType != 2)
+                                {
+                                    <option value="@m.TicketId">Vé tour - @m.Price</option>
+                                }
 
                             }
                         </select>
-                        <label class="form-check-label" style="color: white" for="flexCheckDefault">
-                            Vé tháng
-                            <input type="checkbox" id="veThang" onclick="checkVeThang()" />
-                        </label>
-                        <input type="text" placeholder="Giá tiền" id="Giatien" disabled style="color: white">
+                        <div class="row" style="margin-top: 20px">
+                            <div class="form-group col-md-6">
+                                <label style="color: white" for="exampleInputEmail1">Số lượng người lớn</label>
+                                <input type="email" class="form-control" id="ticket_growup" aria-describedby="emailHelp" >
+                            </div>
+                            <div class="form-group col-md-6">
+                                <label style="color: white" for="exampleInputEmail1">Số lượng trẻ em</label>
+                                <input type="email" class="form-control" id="ticket_child" aria-describedby="emailHelp">
+                            </div>
+                        </div>
+
                         <div class="col-md-12 row">
                             <a class="btn btn-warning" href="javascript:void(0)" type="button" onclick="buyTicket()">Xác nhận đặt</a>
                         </div>
@@ -43,7 +63,7 @@
             </div>
             <div class="col-md-6 px-0">
                 <div class="img-box">
-                    <img src="https://file1.hutech.edu.vn/file/editor/homepage1/bus-541.png" alt="">
+                    <img src="@ViewBag.Tour.Poster" alt="" style="width:100%;height:500px;">
                 </div>
             </div>
         </div>
@@ -54,9 +74,11 @@
 <script>
     var ngayphathanh = new Date();
     var ngayhethan = new Date();
+
     $(document).ready(function () {
-        $('#Giatien').val('7000')
+        $('#Price').val('0')
     });
+
     checkVeThang = () => {
         if ($('#veThang').is(":checked")) {
             $('#Giatien').val('30000');
@@ -88,45 +110,59 @@
 
     buyTicket = () => {
         if (JSON.parse(localStorage.getItem('UserInfo'))) {
+            var priceGrowup = $('#ticket_growup').val() ?? 0;
+            var priceChild = $('#ticket_child').val() ?? 0;
+            var totalPrice = priceGrowup * 200000 + priceChild * 100000;
+
             var soduTK = 0;
             var req = {
-                Ngayphathanh: ngayphathanh,
-                Ngayhethan: ngayhethan,
-                Matuyen: $('#select_tuyen').val(),
-                Loaive: 3,
-                Vethang: $('#veThang').is(":checked"),
-                Giatien: $('#Giatien').val(),
-                Id_Taikhoan: JSON.parse(localStorage.getItem('UserInfo')).Id_Taikhoan
+                TourId: @ViewBag.TourId,
+                Status: 1,
+                AccountId: JSON.parse(localStorage.getItem('UserInfo')).AccountId,
+                TotalPrice: totalPrice,
+                TicketGrowup: priceGrowup,
+                TicketChild: priceChild
             }
 
-            $.ajax({
-                url: '/TaiKhoan/FindById?id_taikhoan=' + JSON.parse(localStorage.getItem('UserInfo')).Id_Taikhoan,
-                type: 'GET',
-                success: function (result) {
-                    if (result.success) {
-                        soduTK = result.data.Sodu;
-                        if (soduTK < $('#Giatien').val()) {
-                            toastr.warning('Số dư trong tài khoản không đủ. Bạn cần nạp thêm tiền !');
-                        }
-                        else {
-                            postData('/UserPage/BuyTicket', req)
-                                .then((data) => {
-                                    if (data.success) {
-                                        toastr.success('Successfully !');
-                                    }
-                                    else {
-                                        toastr.warning('Failed !');
-                                        $('.modal').modal('hide');
-                                    }
-                                });
-                        }
+            postData('/UserPage/BuyTicket', req)
+                .then((data) => {
+                    if (data.success) {
+                        toastr.success('Successfully !');
                     }
                     else {
                         toastr.warning('Failed !');
                         $('.modal').modal('hide');
                     }
-                }
-            });
+                });
+
+            //$.ajax({
+            //    url: '/Account/FindById?id=' + JSON.parse(localStorage.getItem('UserInfo')).AccountId,
+            //    type: 'GET',
+            //    success: function (result) {
+            //        if (result.success) {
+            //            soduTK = result.data.Balance;
+            //            if (soduTK < totalPrice) {
+            //                toastr.warning('Số dư trong tài khoản không đủ. Bạn cần nạp thêm tiền !');
+            //            }
+            //            else {
+            //                postData('/UserPage/BuyTicket', req)
+            //                    .then((data) => {
+            //                        if (data.success) {
+            //                            toastr.success('Successfully !');
+            //                        }
+            //                        else {
+            //                            toastr.warning('Failed !');
+            //                            $('.modal').modal('hide');
+            //                        }
+            //                    });
+            //            }
+            //        }
+            //        else {
+            //            toastr.warning('Failed !');
+            //            $('.modal').modal('hide');
+            //        }
+            //    }
+            //});
         }
         else {
             toastr.warning('Bạn cần đăng nhập để thực hiện thao tác này !');
