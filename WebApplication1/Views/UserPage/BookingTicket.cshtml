@@ -112,57 +112,39 @@
         if (JSON.parse(localStorage.getItem('UserInfo'))) {
             var priceGrowup = $('#ticket_growup').val() ?? 0;
             var priceChild = $('#ticket_child').val() ?? 0;
-            var totalPrice = priceGrowup * 200000 + priceChild * 100000;
 
             var soduTK = 0;
             var req = {
                 TourId: @ViewBag.TourId,
                 Status: 1,
                 AccountId: JSON.parse(localStorage.getItem('UserInfo')).AccountId,
-                TotalPrice: totalPrice,
                 TicketGrowup: priceGrowup,
                 TicketChild: priceChild
             }
 
-            postData('/UserPage/BuyTicket', req)
-                .then((data) => {
-                    if (data.success) {
-                        toastr.success('Successfully !');
+            $.ajax({
+                url: '/Account/FindById?id=' + JSON.parse(localStorage.getItem('UserInfo')).AccountId,
+                type: 'GET',
+                success: function (result) {
+                    if (result.success) {
+                        soduTK = result.data.Balance;
+                        postData('/UserPage/BuyTicket', req)
+                            .then((data) => {
+                                if (data.success) {
+                                    toastr.success('Successfully !');
+                                }
+                                else {
+                                    toastr.warning('Failed !');
+                                    toastr.warning('Số dư trong tài khoản không đủ. Bạn cần nạp thêm tiền !');
+                                }
+                            });
                     }
                     else {
                         toastr.warning('Failed !');
                         $('.modal').modal('hide');
                     }
-                });
-
-            //$.ajax({
-            //    url: '/Account/FindById?id=' + JSON.parse(localStorage.getItem('UserInfo')).AccountId,
-            //    type: 'GET',
-            //    success: function (result) {
-            //        if (result.success) {
-            //            soduTK = result.data.Balance;
-            //            if (soduTK < totalPrice) {
-            //                toastr.warning('Số dư trong tài khoản không đủ. Bạn cần nạp thêm tiền !');
-            //            }
-            //            else {
-            //                postData('/UserPage/BuyTicket', req)
-            //                    .then((data) => {
-            //                        if (data.success) {
-            //                            toastr.success('Successfully !');
-            //                        }
-            //                        else {
-            //                            toastr.warning('Failed !');
-            //                            $('.modal').modal('hide');
-            //                        }
-            //                    });
-            //            }
-            //        }
-            //        else {
-            //            toastr.warning('Failed !');
-            //            $('.modal').modal('hide');
-            //        }
-            //    }
-            //});
+                }
+            });
         }
         else {
             toastr.warning('Bạn cần đăng nhập để thực hiện thao tác này !');

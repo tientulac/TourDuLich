@@ -14,44 +14,42 @@
         </div>
         <div class="col-md-12">
             <div class="row">
+                <div class="col-md-12">
+                    <button onclick="filterTour()" class="btn btn-primary btn-sm" style="float:right">Tìm kiếm</button>
+                </div>
                 <div class="col-md-4">
                     <label style="font-weight: bold">Tên tour</label>
-                    <input class="form-control" type="text" name="name" value="" placeholder="Tên tour" />
+                    <input class="form-control" type="text" id="TourName" value="" placeholder="Tên tour" />
                 </div>
                 <div class="col-md-2">
                     <label style="font-weight: bold">Ngày bắt đầu</label>
-
-                    <input class="form-control" type="date" name="name" value="" />
+                    <input class="form-control" type="date" id="StartDate" value="" />
                 </div>
                 <div class="col-md-2">
                     <label style="font-weight: bold">Ngày kết thúc</label>
-
-                    <input class="form-control" type="date" name="name" value="" />
+                    <input class="form-control" type="date" id="EndDate" value="" />
                 </div>
                 <div class="col-md-4">
                     <label style="font-weight: bold">Giá</label>
 
-                    <select class="form-control">
+                    <select class="form-control" id="PriceOrder">
                         <option value="" selected>Chọn mức giá</option>
                         <option value="ADSC">Tăng dần</option>
-                        <option value="ADSC">Giảm dần</option>
+                        <option value="DESC">Giảm dần</option>
                     </select>
                 </div>
                 <div style="margin-top: 10px;" class="col-md-4">
                     <label style="font-weight: bold">Điểm đi</label>
-
-                    <input class="form-control" type="text" name="name" value="" placeholder="Điểm đi" />
+                    <input class="form-control" type="text" id="LocationFrom" value="" placeholder="Điểm đi" />
                 </div>
                 <div style="margin-top: 10px;" class="col-md-4">
                     <label style="font-weight: bold">Điểm đến</label>
-
-                    <input class="form-control" type="text" name="name" value="" placeholder="Điểm đến" />
+                    <input class="form-control" type="text" id="LocationTo" value="" placeholder="Điểm đến" />
                 </div>
-                <div style="margin-top: 10px;" class="col-md-4">
+                @*<div style="margin-top: 10px;" class="col-md-4">
                     <label style="font-weight: bold">Phương tiện di chuyển</label>
-
-                    <input class="form-control" type="text" name="name" value="" placeholder="Phương tiện di chuyển" />
-                </div>
+                    <input class="form-control" type="text" id="VehicleName" value="" placeholder="Điểm đến" />
+                </div>*@
 
             </div>
         </div>
@@ -59,7 +57,7 @@
             <div class="row">
                 @foreach (var m in @ViewBag.ListTour)
                 {
-                    <a href="/UserPage/TourDetail?tourId=@m.TourId" class="box col-md-4" style="margin-top: 15px; color: black;">
+                    <a href="/UserPage/TourDetail?tourId=@m.TourId" class="box" style="margin-top: 15px; color: black;">
                         <div class="date-box">
                             <h6>
                                 @m.TourTime
@@ -86,7 +84,7 @@
                             </p>
                             <br>
                             <p>
-                                Có nhân viên phục vụ đồ ăn, đồ uống trong suốt chuyến bay. (Mọi chi phí đã được tính vào giá tour).
+                                @m.Descrip
                             </p>
                         </div>
                     </a>
@@ -95,3 +93,17 @@
         </div>
     </div>
 </section>
+
+
+<script>
+    filterTour = () => {
+        var tourName = $('#TourName').val() ?? '';
+        var startDate = $('#StartDate').val() ?? null;
+        var endDate = $('#EndDate').val() ?? null;
+        var priceOrder = $('#PriceOrder').val();
+        var locationFrom = $('#LocationFrom').val();
+        var locationTo = $('#LocationTo').val();
+        //var _vehicleName = $('VehicleName').val();
+        window.location.href = `../UserPage/ListTour?tourName=${tourName}&startDate=${startDate}&endDate=${endDate}&priceOrder=${priceOrder}&locationFrom=${locationFrom}&locationTo=${locationTo}`;
+    }
+</script>

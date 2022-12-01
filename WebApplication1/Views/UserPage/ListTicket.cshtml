@@ -164,28 +164,28 @@
                             <tbody id="myTable">
                                 @foreach (var m in @ViewBag.ListTicket)
                                 {
-                                <tr>
-                                    <td>@m.CreatedAt</td>
-                                    @if (m.Status == 1)
-                                    {
-                                        <td style="color: green">Đã mua thành công</td>
+                                    <tr>
+                                        <td>@m.CreatedAt</td>
+                                        @if (m.Status == 1)
+                                        {
+                                            <td style="color: green">Đã mua thành công</td>
 
-                                    }
-                                    @if (m.Status == 2)
-                                    {
-                                        <td style="color: red">Đã hủy</td>
+                                        }
+                                        @if (m.Status == 2)
+                                        {
+                                            <td style="color: red">Đã hủy</td>
 
-                                    }
-                                    <td>@m.Status</td>
-                                    <td style="text-align: center" id="qrcode">
-                                        <img src="data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAAB4AAAAeCAYAAAA7MK6iAAAAAXNSR0IArs4c6QAAAaxJREFUSEulV1uOxCAMK/c/NCtQE7nGThjtfJUWyMt2MmPOOZ/3N8Z4YPmsdfzW+1jHM+7FO9az+oZ7xjJ8YwD3pDfvAzsbawyEnbaG8XBEEBexo5wx9f0wvLKCESiD6zse/HWtsrUj5tRxijpnEAcOL4eNqDHXhdOKgKpSrcCoSrVgu4N24OGEOGQ7ILlsJrgq4+ixelZUYmrynh0x8o5BpGqm0N0BlM8c4FKGK0NKcBiMnO7NClYutakTBKSXQjjeGYFlqitKKCnt5BKzxPjZa+ZxJXP/pRQCMw07FFaC4KSxK806d/DYHXJ8dphwEptRKwG5aY03MsmihEF9upOK1vGYedtJLFNMCgg3fdX2qqw4en3kFptEVRcXYRjpJhSrXEr8+d1tXXk0Yk5vZxFcrsbyIM1nrE6VwBySyR0EmwentONq11w+AsKpZIG4bSBKItHxjLjiG7dMqbvvGOwkFQPKsnUzl0sxUuYKTOTc0Rar2t3WHJuBGhS3VquB/katWKPVsKj2ZD92hisgqcbQ9V8+U6ZaGeiQ39EoM6P+SaiJQ6mWksvO2bj7D9Pgvf6Y51aaAAAAAElFTkSuQmCC" style="display: block;">
-                                    </td>
-                                    <td>
-                                        <button class="btn btn-outline-danger btn-sm" onclick="openDeleteModal(@m.OrderId)" data-toggle="modal" data-target="#deleteModal">
-                                            <i class="fas fa-trash-alt"></i>
-                                        </button>
-                                    </td>
-                                </tr>
+                                        }
+                                        <td>@m.TotalPrice</td>
+                                        <td style="text-align: center" id="qrcode">
+                                            <img src="data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAAB4AAAAeCAYAAAA7MK6iAAAAAXNSR0IArs4c6QAAAaxJREFUSEulV1uOxCAMK/c/NCtQE7nGThjtfJUWyMt2MmPOOZ/3N8Z4YPmsdfzW+1jHM+7FO9az+oZ7xjJ8YwD3pDfvAzsbawyEnbaG8XBEEBexo5wx9f0wvLKCESiD6zse/HWtsrUj5tRxijpnEAcOL4eNqDHXhdOKgKpSrcCoSrVgu4N24OGEOGQ7ILlsJrgq4+ixelZUYmrynh0x8o5BpGqm0N0BlM8c4FKGK0NKcBiMnO7NClYutakTBKSXQjjeGYFlqitKKCnt5BKzxPjZa+ZxJXP/pRQCMw07FFaC4KSxK806d/DYHXJ8dphwEptRKwG5aY03MsmihEF9upOK1vGYedtJLFNMCgg3fdX2qqw4en3kFptEVRcXYRjpJhSrXEr8+d1tXXk0Yk5vZxFcrsbyIM1nrE6VwBySyR0EmwentONq11w+AsKpZIG4bSBKItHxjLjiG7dMqbvvGOwkFQPKsnUzl0sxUuYKTOTc0Rar2t3WHJuBGhS3VquB/katWKPVsKj2ZD92hisgqcbQ9V8+U6ZaGeiQ39EoM6P+SaiJQ6mWksvO2bj7D9Pgvf6Y51aaAAAAAElFTkSuQmCC" style="display: block;">
+                                        </td>
+                                        <td>
+                                            <button class="btn btn-outline-danger btn-sm" onclick="openDeleteModal(@m.OrderId)" data-toggle="modal" data-target="#deleteModal">
+                                                Hủy Tour
+                                            </button>
+                                        </td>
+                                    </tr>
                                 }
                             </tbody>
                         </table>
@@ -234,6 +234,27 @@
 </div>
 
 
+<!-- Modal -->
+<div class="modal fade" id="deleteModal" tabindex="-1" role="dialog" aria-labelledby="deleteModalLabel" aria-hidden="true">
+    <div class="modal-dialog" role="document">
+        <div class="modal-content">
+            <div class="modal-header">
+                <h5 class="modal-title" id="deleteModalLabel">Xóa</h5>
+                <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                    <span aria-hidden="true">&times;</span>
+                </button>
+            </div>
+            <div class="modal-body">
+                <h4 style="text-align:center">Bạn chắc chắn muốn hủy tour này ?</h4>
+            </div>
+            <div class="modal-footer">
+                <button type="button" class="btn btn-secondary" data-dismiss="modal">Hủy bỏ</button>
+                <button type="button" class="btn btn-primary" onclick="deleteItem()">Xác nhận</button>
+            </div>
+        </div>
+    </div>
+</div>
+
 <script type="text/javascript" src="~/Scripts/qrcode.min.js"></script>
 <script>
     var id_kh = 0;
@@ -252,6 +273,10 @@
         id_kh = id;
     }
 
+    openDeleteModal = (id) => {
+        id_record = id;
+    }
+
     submit = () => {
         $.ajax({
             url: '/UserPage/NapTien?id_tk=' + id_kh,
@@ -263,6 +288,24 @@
                 }
                 else {
                     toastr.warning('Failed !');
+                    $('.modal').modal('hide');
+                }
+            }
+        });
+    }
+
+    deleteItem = () => {
+        $.ajax({
+            url: '/UserPage/CancelOrder?id=' + id_record,
+            type: 'GET',
+            success: function (result) {
+                if (result.success) {
+                    toastr.success(result.message);
+                    $('.modal').modal('hide');
+                    window.location.reload();
+                }
+                else {
+                    toastr.warning(result.message);
                     $('.modal').modal('hide');
                 }
             }
