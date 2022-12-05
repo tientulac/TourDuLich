@@ -33,9 +33,9 @@ namespace WebApplication1.Models
     partial void InsertAccount(Account instance);
     partial void UpdateAccount(Account instance);
     partial void DeleteAccount(Account instance);
-    partial void InsertVehicle(Vehicle instance);
-    partial void UpdateVehicle(Vehicle instance);
-    partial void DeleteVehicle(Vehicle instance);
+    partial void InsertVoteTour(VoteTour instance);
+    partial void UpdateVoteTour(VoteTour instance);
+    partial void DeleteVoteTour(VoteTour instance);
     partial void InsertCategory(Category instance);
     partial void UpdateCategory(Category instance);
     partial void DeleteCategory(Category instance);
@@ -69,10 +69,13 @@ namespace WebApplication1.Models
     partial void InsertTourStaff(TourStaff instance);
     partial void UpdateTourStaff(TourStaff instance);
     partial void DeleteTourStaff(TourStaff instance);
+    partial void InsertVehicle(Vehicle instance);
+    partial void UpdateVehicle(Vehicle instance);
+    partial void DeleteVehicle(Vehicle instance);
     #endregion
 		
 		public LinqDataContext() : 
-				base(global::System.Configuration.ConfigurationManager.ConnectionStrings["TicketTourConnectionString1"].ConnectionString, mappingSource)
+				base(global::System.Configuration.ConfigurationManager.ConnectionStrings["TicketTourConnectionString"].ConnectionString, mappingSource)
 		{
 			OnCreated();
 		}
@@ -109,11 +112,11 @@ namespace WebApplication1.Models
 			}
 		}
 		
-		public System.Data.Linq.Table<Vehicle> Vehicles
+		public System.Data.Linq.Table<VoteTour> VoteTours
 		{
 			get
 			{
-				return this.GetTable<Vehicle>();
+				return this.GetTable<VoteTour>();
 			}
 		}
 		
@@ -202,6 +205,14 @@ namespace WebApplication1.Models
 			get
 			{
 				return this.GetTable<TourStaff>();
+			}
+		}
+		
+		public System.Data.Linq.Table<Vehicle> Vehicles
+		{
+			get
+			{
+				return this.GetTable<Vehicle>();
 			}
 		}
 	}
@@ -460,139 +471,163 @@ namespace WebApplication1.Models
 		}
 	}
 	
-	[global::System.Data.Linq.Mapping.TableAttribute(Name="dbo.Vehicle")]
-	public partial class Vehicle : INotifyPropertyChanging, INotifyPropertyChanged
+	[global::System.Data.Linq.Mapping.TableAttribute(Name="dbo.VoteTour")]
+	public partial class VoteTour : INotifyPropertyChanging, INotifyPropertyChanged
 	{
 		
 		private static PropertyChangingEventArgs emptyChangingEventArgs = new PropertyChangingEventArgs(String.Empty);
 		
-		private int _VehicleId;
+		private int _VoteTourId;
 		
-		private string _VahicleName;
+		private System.Nullable<int> _AccountId;
 		
-		private string _VehicleCode;
+		private System.Nullable<int> _TourId;
 		
-		private System.Nullable<int> _Status;
+		private System.Nullable<int> _Star;
 		
-		private System.Nullable<int> _Slot;
+		private string _Comment;
+		
+		private System.Nullable<System.DateTime> _CreatedAt;
 		
     #region Extensibility Method Definitions
     partial void OnLoaded();
     partial void OnValidate(System.Data.Linq.ChangeAction action);
     partial void OnCreated();
-    partial void OnVehicleIdChanging(int value);
-    partial void OnVehicleIdChanged();
-    partial void OnVahicleNameChanging(string value);
-    partial void OnVahicleNameChanged();
-    partial void OnVehicleCodeChanging(string value);
-    partial void OnVehicleCodeChanged();
-    partial void OnStatusChanging(System.Nullable<int> value);
-    partial void OnStatusChanged();
-    partial void OnSlotChanging(System.Nullable<int> value);
-    partial void OnSlotChanged();
+    partial void OnVoteTourIdChanging(int value);
+    partial void OnVoteTourIdChanged();
+    partial void OnAccountIdChanging(System.Nullable<int> value);
+    partial void OnAccountIdChanged();
+    partial void OnTourIdChanging(System.Nullable<int> value);
+    partial void OnTourIdChanged();
+    partial void OnStarChanging(System.Nullable<int> value);
+    partial void OnStarChanged();
+    partial void OnCommentChanging(string value);
+    partial void OnCommentChanged();
+    partial void OnCreatedAtChanging(System.Nullable<System.DateTime> value);
+    partial void OnCreatedAtChanged();
     #endregion
 		
-		public Vehicle()
+		public VoteTour()
 		{
 			OnCreated();
 		}
 		
-		[global::System.Data.Linq.Mapping.ColumnAttribute(Storage="_VehicleId", AutoSync=AutoSync.OnInsert, DbType="Int NOT NULL IDENTITY", IsPrimaryKey=true, IsDbGenerated=true)]
-		public int VehicleId
+		[global::System.Data.Linq.Mapping.ColumnAttribute(Storage="_VoteTourId", AutoSync=AutoSync.OnInsert, DbType="Int NOT NULL IDENTITY", IsPrimaryKey=true, IsDbGenerated=true)]
+		public int VoteTourId
 		{
 			get
 			{
-				return this._VehicleId;
+				return this._VoteTourId;
 			}
 			set
 			{
-				if ((this._VehicleId != value))
+				if ((this._VoteTourId != value))
 				{
-					this.OnVehicleIdChanging(value);
+					this.OnVoteTourIdChanging(value);
 					this.SendPropertyChanging();
-					this._VehicleId = value;
-					this.SendPropertyChanged("VehicleId");
-					this.OnVehicleIdChanged();
+					this._VoteTourId = value;
+					this.SendPropertyChanged("VoteTourId");
+					this.OnVoteTourIdChanged();
 				}
 			}
 		}
 		
-		[global::System.Data.Linq.Mapping.ColumnAttribute(Storage="_VahicleName", DbType="NVarChar(50)")]
-		public string VahicleName
+		[global::System.Data.Linq.Mapping.ColumnAttribute(Storage="_AccountId", DbType="Int")]
+		public System.Nullable<int> AccountId
 		{
 			get
 			{
-				return this._VahicleName;
+				return this._AccountId;
 			}
 			set
 			{
-				if ((this._VahicleName != value))
+				if ((this._AccountId != value))
 				{
-					this.OnVahicleNameChanging(value);
+					this.OnAccountIdChanging(value);
 					this.SendPropertyChanging();
-					this._VahicleName = value;
-					this.SendPropertyChanged("VahicleName");
-					this.OnVahicleNameChanged();
+					this._AccountId = value;
+					this.SendPropertyChanged("AccountId");
+					this.OnAccountIdChanged();
 				}
 			}
 		}
 		
-		[global::System.Data.Linq.Mapping.ColumnAttribute(Storage="_VehicleCode", DbType="NVarChar(50)")]
-		public string VehicleCode
+		[global::System.Data.Linq.Mapping.ColumnAttribute(Storage="_TourId", DbType="Int")]
+		public System.Nullable<int> TourId
 		{
 			get
 			{
-				return this._VehicleCode;
+				return this._TourId;
 			}
 			set
 			{
-				if ((this._VehicleCode != value))
+				if ((this._TourId != value))
 				{
-					this.OnVehicleCodeChanging(value);
+					this.OnTourIdChanging(value);
 					this.SendPropertyChanging();
-					this._VehicleCode = value;
-					this.SendPropertyChanged("VehicleCode");
-					this.OnVehicleCodeChanged();
+					this._TourId = value;
+					this.SendPropertyChanged("TourId");
+					this.OnTourIdChanged();
 				}
 			}
 		}
 		
-		[global::System.Data.Linq.Mapping.ColumnAttribute(Storage="_Status", DbType="Int")]
-		public System.Nullable<int> Status
+		[global::System.Data.Linq.Mapping.ColumnAttribute(Storage="_Star", DbType="Int")]
+		public System.Nullable<int> Star
 		{
 			get
 			{
-				return this._Status;
+				return this._Star;
 			}
 			set
 			{
-				if ((this._Status != value))
+				if ((this._Star != value))
 				{
-					this.OnStatusChanging(value);
+					this.OnStarChanging(value);
 					this.SendPropertyChanging();
-					this._Status = value;
-					this.SendPropertyChanged("Status");
-					this.OnStatusChanged();
+					this._Star = value;
+					this.SendPropertyChanged("Star");
+					this.OnStarChanged();
 				}
 			}
 		}
 		
-		[global::System.Data.Linq.Mapping.ColumnAttribute(Storage="_Slot", DbType="Int")]
-		public System.Nullable<int> Slot
+		[global::System.Data.Linq.Mapping.ColumnAttribute(Storage="_Comment", DbType="NVarChar(MAX)")]
+		public string Comment
 		{
 			get
 			{
-				return this._Slot;
+				return this._Comment;
 			}
 			set
 			{
-				if ((this._Slot != value))
+				if ((this._Comment != value))
 				{
-					this.OnSlotChanging(value);
+					this.OnCommentChanging(value);
 					this.SendPropertyChanging();
-					this._Slot = value;
-					this.SendPropertyChanged("Slot");
-					this.OnSlotChanged();
+					this._Comment = value;
+					this.SendPropertyChanged("Comment");
+					this.OnCommentChanged();
+				}
+			}
+		}
+		
+		[global::System.Data.Linq.Mapping.ColumnAttribute(Storage="_CreatedAt", DbType="DateTime")]
+		public System.Nullable<System.DateTime> CreatedAt
+		{
+			get
+			{
+				return this._CreatedAt;
+			}
+			set
+			{
+				if ((this._CreatedAt != value))
+				{
+					this.OnCreatedAtChanging(value);
+					this.SendPropertyChanging();
+					this._CreatedAt = value;
+					this.SendPropertyChanged("CreatedAt");
+					this.OnCreatedAtChanged();
 				}
 			}
 		}
@@ -2643,6 +2678,164 @@ namespace WebApplication1.Models
 					this._TourId = value;
 					this.SendPropertyChanged("TourId");
 					this.OnTourIdChanged();
+				}
+			}
+		}
+		
+		public event PropertyChangingEventHandler PropertyChanging;
+		
+		public event PropertyChangedEventHandler PropertyChanged;
+		
+		protected virtual void SendPropertyChanging()
+		{
+			if ((this.PropertyChanging != null))
+			{
+				this.PropertyChanging(this, emptyChangingEventArgs);
+			}
+		}
+		
+		protected virtual void SendPropertyChanged(String propertyName)
+		{
+			if ((this.PropertyChanged != null))
+			{
+				this.PropertyChanged(this, new PropertyChangedEventArgs(propertyName));
+			}
+		}
+	}
+	
+	[global::System.Data.Linq.Mapping.TableAttribute(Name="dbo.Vehicle")]
+	public partial class Vehicle : INotifyPropertyChanging, INotifyPropertyChanged
+	{
+		
+		private static PropertyChangingEventArgs emptyChangingEventArgs = new PropertyChangingEventArgs(String.Empty);
+		
+		private int _VehicleId;
+		
+		private string _VahicleName;
+		
+		private string _VehicleCode;
+		
+		private System.Nullable<int> _Status;
+		
+		private System.Nullable<int> _Slot;
+		
+    #region Extensibility Method Definitions
+    partial void OnLoaded();
+    partial void OnValidate(System.Data.Linq.ChangeAction action);
+    partial void OnCreated();
+    partial void OnVehicleIdChanging(int value);
+    partial void OnVehicleIdChanged();
+    partial void OnVahicleNameChanging(string value);
+    partial void OnVahicleNameChanged();
+    partial void OnVehicleCodeChanging(string value);
+    partial void OnVehicleCodeChanged();
+    partial void OnStatusChanging(System.Nullable<int> value);
+    partial void OnStatusChanged();
+    partial void OnSlotChanging(System.Nullable<int> value);
+    partial void OnSlotChanged();
+    #endregion
+		
+		public Vehicle()
+		{
+			OnCreated();
+		}
+		
+		[global::System.Data.Linq.Mapping.ColumnAttribute(Storage="_VehicleId", AutoSync=AutoSync.OnInsert, DbType="Int NOT NULL IDENTITY", IsPrimaryKey=true, IsDbGenerated=true)]
+		public int VehicleId
+		{
+			get
+			{
+				return this._VehicleId;
+			}
+			set
+			{
+				if ((this._VehicleId != value))
+				{
+					this.OnVehicleIdChanging(value);
+					this.SendPropertyChanging();
+					this._VehicleId = value;
+					this.SendPropertyChanged("VehicleId");
+					this.OnVehicleIdChanged();
+				}
+			}
+		}
+		
+		[global::System.Data.Linq.Mapping.ColumnAttribute(Storage="_VahicleName", DbType="NVarChar(50)")]
+		public string VahicleName
+		{
+			get
+			{
+				return this._VahicleName;
+			}
+			set
+			{
+				if ((this._VahicleName != value))
+				{
+					this.OnVahicleNameChanging(value);
+					this.SendPropertyChanging();
+					this._VahicleName = value;
+					this.SendPropertyChanged("VahicleName");
+					this.OnVahicleNameChanged();
+				}
+			}
+		}
+		
+		[global::System.Data.Linq.Mapping.ColumnAttribute(Storage="_VehicleCode", DbType="NVarChar(50)")]
+		public string VehicleCode
+		{
+			get
+			{
+				return this._VehicleCode;
+			}
+			set
+			{
+				if ((this._VehicleCode != value))
+				{
+					this.OnVehicleCodeChanging(value);
+					this.SendPropertyChanging();
+					this._VehicleCode = value;
+					this.SendPropertyChanged("VehicleCode");
+					this.OnVehicleCodeChanged();
+				}
+			}
+		}
+		
+		[global::System.Data.Linq.Mapping.ColumnAttribute(Storage="_Status", DbType="Int")]
+		public System.Nullable<int> Status
+		{
+			get
+			{
+				return this._Status;
+			}
+			set
+			{
+				if ((this._Status != value))
+				{
+					this.OnStatusChanging(value);
+					this.SendPropertyChanging();
+					this._Status = value;
+					this.SendPropertyChanged("Status");
+					this.OnStatusChanged();
+				}
+			}
+		}
+		
+		[global::System.Data.Linq.Mapping.ColumnAttribute(Storage="_Slot", DbType="Int")]
+		public System.Nullable<int> Slot
+		{
+			get
+			{
+				return this._Slot;
+			}
+			set
+			{
+				if ((this._Slot != value))
+				{
+					this.OnSlotChanging(value);
+					this.SendPropertyChanging();
+					this._Slot = value;
+					this.SendPropertyChanged("Slot");
+					this.OnSlotChanged();
 				}
 			}
 		}

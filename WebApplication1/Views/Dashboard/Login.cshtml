@@ -351,16 +351,16 @@
                         Token: data.token
                     };
                     localStorage.setItem("UserInfo", JSON.stringify(userInfo));
-                    if (AccountType.Maloai == 1 || AccountType.Maloai == 3) {
+                    if (userInfo.AccountType == 1 || (userInfo.AccountType == 3 && userInfo.Admin == true)) {
                         toastr.success('Successfully !');
                         window.location.assign('../Dashboard/Index');
                     }
                     else {
-                        toastr.warning('This account has no role ADMIN !');
+                        toastr.warning('Tài khoản không có quyền admin để vào trang quản trị !');
                     }
                 }
                 else {
-                    toastr.warning('Wrong password or username !');
+                    toastr.warning('Thông tin đăng nhập không chính xác !');
                 }
             });
     }

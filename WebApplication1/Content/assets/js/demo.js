@@ -164,15 +164,15 @@ var dailySalesChart = document.getElementById('dailySalesChart').getContext('2d'
 var myDailySalesChart = new Chart(dailySalesChart, {
 	type: 'line',
 	data: {
-		labels:["January",
-		"February",
-		"March",
-		"April",
-		"May",
-		"June",
-		"July",
-		"August",
-		"September"],
+		labels:["Tháng 1",
+		"Tháng 2",
+		"Tháng 3",
+		"Tháng 4",
+		"Tháng 5",
+		"Tháng 6",
+		"Tháng 7",
+		"Tháng 8",
+		"Tháng 9"],
 		datasets:[ {
 			label: "Sales Analytics", fill: !0, backgroundColor: "rgba(255,255,255,0.2)", borderColor: "#fff", borderCapStyle: "butt", borderDash: [], borderDashOffset: 0, pointBorderColor: "#fff", pointBackgroundColor: "#fff", pointBorderWidth: 1, pointHoverRadius: 5, pointHoverBackgroundColor: "#fff", pointHoverBorderColor: "#fff", pointHoverBorderWidth: 1, pointRadius: 1, pointHitRadius: 5, data: [65, 59, 80, 81, 56, 55, 40, 35, 30]
 		}]

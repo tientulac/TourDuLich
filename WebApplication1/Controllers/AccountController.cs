@@ -61,7 +61,9 @@ namespace WebApplication1.Controllers
                                      Email = a.Email,
                                      Phone = a.Phone,
                                      Balance = a.Balance.GetValueOrDefault(),
-                                     AccountType = a.AccountType.GetValueOrDefault()
+                                     AccountType = a.AccountType.GetValueOrDefault(),
+                                     Admin = a.Admin.GetValueOrDefault(),
+                                     Active = a.Active.GetValueOrDefault()
                                  }).FirstOrDefault();
                 return Json(new { success = true, data = _taikhoan, token = createToken(_taikhoan.UserName) }, JsonRequestBehavior.AllowGet);
             }

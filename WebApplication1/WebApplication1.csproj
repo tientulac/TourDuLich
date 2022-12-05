@@ -179,6 +179,7 @@
     <Compile Include="Controllers\TourScheduleController.cs" />
     <Compile Include="Controllers\UserPageController.cs" />
     <Compile Include="Controllers\VehicleController.cs" />
+    <Compile Include="Controllers\VoteTourController.cs" />
     <Compile Include="Global.asax.cs">
       <DependentUpon>Global.asax</DependentUpon>
     </Compile>
@@ -188,6 +189,7 @@
     <Compile Include="Models\DTO\StaffDTO.cs" />
     <Compile Include="Models\DTO\TicketDTO.cs" />
     <Compile Include="Models\DTO\TourDTO.cs" />
+    <Compile Include="Models\DTO\VoteTourDTO.cs" />
     <Compile Include="Models\Linq.designer.cs">
       <AutoGen>True</AutoGen>
       <DesignTime>True</DesignTime>
@@ -770,6 +772,7 @@
     <Folder Include="App_Data\" />
     <Folder Include="Views\TourImage\" />
     <Folder Include="Views\TourSchedule\" />
+    <Folder Include="Views\VoteTour\" />
   </ItemGroup>
   <ItemGroup>
     <Content Include="fonts\glyphicons-halflings-regular.woff2" />
