@@ -767,6 +767,8 @@
     <Content Include="Views\UserPage\ListTour.cshtml" />
     <Content Include="Views\UserPage\TourDetail.cshtml" />
     <Content Include="Views\UserPage\ListTicket.cshtml" />
+    <Content Include="Views\Shared\UserLayout\_Chatbot.cshtml" />
+    <Content Include="Views\Shared\UserLayout\_Test.cshtml" />
   </ItemGroup>
   <ItemGroup>
     <Folder Include="App_Data\" />

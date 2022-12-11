@@ -30,9 +30,6 @@ namespace WebApplication1.Models
 		
     #region Extensibility Method Definitions
     partial void OnCreated();
-    partial void InsertAccount(Account instance);
-    partial void UpdateAccount(Account instance);
-    partial void DeleteAccount(Account instance);
     partial void InsertVoteTour(VoteTour instance);
     partial void UpdateVoteTour(VoteTour instance);
     partial void DeleteVoteTour(VoteTour instance);
@@ -48,18 +45,9 @@ namespace WebApplication1.Models
     partial void InsertLocation(Location instance);
     partial void UpdateLocation(Location instance);
     partial void DeleteLocation(Location instance);
-    partial void InsertOrder(Order instance);
-    partial void UpdateOrder(Order instance);
-    partial void DeleteOrder(Order instance);
     partial void InsertStaff(Staff instance);
     partial void UpdateStaff(Staff instance);
     partial void DeleteStaff(Staff instance);
-    partial void InsertTicket(Ticket instance);
-    partial void UpdateTicket(Ticket instance);
-    partial void DeleteTicket(Ticket instance);
-    partial void InsertTour(Tour instance);
-    partial void UpdateTour(Tour instance);
-    partial void DeleteTour(Tour instance);
     partial void InsertTourImage(TourImage instance);
     partial void UpdateTourImage(TourImage instance);
     partial void DeleteTourImage(TourImage instance);
@@ -72,6 +60,18 @@ namespace WebApplication1.Models
     partial void InsertVehicle(Vehicle instance);
     partial void UpdateVehicle(Vehicle instance);
     partial void DeleteVehicle(Vehicle instance);
+    partial void InsertOrder(Order instance);
+    partial void UpdateOrder(Order instance);
+    partial void DeleteOrder(Order instance);
+    partial void InsertAccount(Account instance);
+    partial void UpdateAccount(Account instance);
+    partial void DeleteAccount(Account instance);
+    partial void InsertTicket(Ticket instance);
+    partial void UpdateTicket(Ticket instance);
+    partial void DeleteTicket(Ticket instance);
+    partial void InsertTour(Tour instance);
+    partial void UpdateTour(Tour instance);
+    partial void DeleteTour(Tour instance);
     #endregion
 		
 		public LinqDataContext() : 
@@ -102,14 +102,6 @@ namespace WebApplication1.Models
 				base(connection, mappingSource)
 		{
 			OnCreated();
-		}
-		
-		public System.Data.Linq.Table<Account> Accounts
-		{
-			get
-			{
-				return this.GetTable<Account>();
-			}
 		}
 		
 		public System.Data.Linq.Table<VoteTour> VoteTours
@@ -152,35 +144,11 @@ namespace WebApplication1.Models
 			}
 		}
 		
-		public System.Data.Linq.Table<Order> Orders
-		{
-			get
-			{
-				return this.GetTable<Order>();
-			}
-		}
-		
 		public System.Data.Linq.Table<Staff> Staffs
 		{
 			get
 			{
 				return this.GetTable<Staff>();
-			}
-		}
-		
-		public System.Data.Linq.Table<Ticket> Tickets
-		{
-			get
-			{
-				return this.GetTable<Ticket>();
-			}
-		}
-		
-		public System.Data.Linq.Table<Tour> Tours
-		{
-			get
-			{
-				return this.GetTable<Tour>();
 			}
 		}
 		
@@ -215,258 +183,36 @@ namespace WebApplication1.Models
 				return this.GetTable<Vehicle>();
 			}
 		}
-	}
-	
-	[global::System.Data.Linq.Mapping.TableAttribute(Name="dbo.Account")]
-	public partial class Account : INotifyPropertyChanging, INotifyPropertyChanged
-	{
 		
-		private static PropertyChangingEventArgs emptyChangingEventArgs = new PropertyChangingEventArgs(String.Empty);
-		
-		private int _AccountId;
-		
-		private string _UserName;
-		
-		private string _Password;
-		
-		private string _Email;
-		
-		private string _Phone;
-		
-		private System.Nullable<int> _AccountType;
-		
-		private System.Nullable<bool> _Admin;
-		
-		private System.Nullable<bool> _Active;
-		
-		private System.Nullable<decimal> _Balance;
-		
-    #region Extensibility Method Definitions
-    partial void OnLoaded();
-    partial void OnValidate(System.Data.Linq.ChangeAction action);
-    partial void OnCreated();
-    partial void OnAccountIdChanging(int value);
-    partial void OnAccountIdChanged();
-    partial void OnUserNameChanging(string value);
-    partial void OnUserNameChanged();
-    partial void OnPasswordChanging(string value);
-    partial void OnPasswordChanged();
-    partial void OnEmailChanging(string value);
-    partial void OnEmailChanged();
-    partial void OnPhoneChanging(string value);
-    partial void OnPhoneChanged();
-    partial void OnAccountTypeChanging(System.Nullable<int> value);
-    partial void OnAccountTypeChanged();
-    partial void OnAdminChanging(System.Nullable<bool> value);
-    partial void OnAdminChanged();
-    partial void OnActiveChanging(System.Nullable<bool> value);
-    partial void OnActiveChanged();
-    partial void OnBalanceChanging(System.Nullable<decimal> value);
-    partial void OnBalanceChanged();
-    #endregion
-		
-		public Account()
-		{
-			OnCreated();
-		}
-		
-		[global::System.Data.Linq.Mapping.ColumnAttribute(Storage="_AccountId", AutoSync=AutoSync.OnInsert, DbType="Int NOT NULL IDENTITY", IsPrimaryKey=true, IsDbGenerated=true)]
-		public int AccountId
+		public System.Data.Linq.Table<Order> Orders
 		{
 			get
 			{
-				return this._AccountId;
-			}
-			set
-			{
-				if ((this._AccountId != value))
-				{
-					this.OnAccountIdChanging(value);
-					this.SendPropertyChanging();
-					this._AccountId = value;
-					this.SendPropertyChanged("AccountId");
-					this.OnAccountIdChanged();
-				}
+				return this.GetTable<Order>();
 			}
 		}
 		
-		[global::System.Data.Linq.Mapping.ColumnAttribute(Storage="_UserName", DbType="NVarChar(50)")]
-		public string UserName
+		public System.Data.Linq.Table<Account> Accounts
 		{
 			get
 			{
-				return this._UserName;
-			}
-			set
-			{
-				if ((this._UserName != value))
-				{
-					this.OnUserNameChanging(value);
-					this.SendPropertyChanging();
-					this._UserName = value;
-					this.SendPropertyChanged("UserName");
-					this.OnUserNameChanged();
-				}
+				return this.GetTable<Account>();
 			}
 		}
 		
-		[global::System.Data.Linq.Mapping.ColumnAttribute(Storage="_Password", DbType="NVarChar(50)")]
-		public string Password
+		public System.Data.Linq.Table<Ticket> Tickets
 		{
 			get
 			{
-				return this._Password;
-			}
-			set
-			{
-				if ((this._Password != value))
-				{
-					this.OnPasswordChanging(value);
-					this.SendPropertyChanging();
-					this._Password = value;
-					this.SendPropertyChanged("Password");
-					this.OnPasswordChanged();
-				}
+				return this.GetTable<Ticket>();
 			}
 		}
 		
-		[global::System.Data.Linq.Mapping.ColumnAttribute(Storage="_Email", DbType="NVarChar(50)")]
-		public string Email
+		public System.Data.Linq.Table<Tour> Tours
 		{
 			get
 			{
-				return this._Email;
-			}
-			set
-			{
-				if ((this._Email != value))
-				{
-					this.OnEmailChanging(value);
-					this.SendPropertyChanging();
-					this._Email = value;
-					this.SendPropertyChanged("Email");
-					this.OnEmailChanged();
-				}
-			}
-		}
-		
-		[global::System.Data.Linq.Mapping.ColumnAttribute(Storage="_Phone", DbType="NVarChar(50)")]
-		public string Phone
-		{
-			get
-			{
-				return this._Phone;
-			}
-			set
-			{
-				if ((this._Phone != value))
-				{
-					this.OnPhoneChanging(value);
-					this.SendPropertyChanging();
-					this._Phone = value;
-					this.SendPropertyChanged("Phone");
-					this.OnPhoneChanged();
-				}
-			}
-		}
-		
-		[global::System.Data.Linq.Mapping.ColumnAttribute(Storage="_AccountType", DbType="Int")]
-		public System.Nullable<int> AccountType
-		{
-			get
-			{
-				return this._AccountType;
-			}
-			set
-			{
-				if ((this._AccountType != value))
-				{
-					this.OnAccountTypeChanging(value);
-					this.SendPropertyChanging();
-					this._AccountType = value;
-					this.SendPropertyChanged("AccountType");
-					this.OnAccountTypeChanged();
-				}
-			}
-		}
-		
-		[global::System.Data.Linq.Mapping.ColumnAttribute(Storage="_Admin", DbType="Bit")]
-		public System.Nullable<bool> Admin
-		{
-			get
-			{
-				return this._Admin;
-			}
-			set
-			{
-				if ((this._Admin != value))
-				{
-					this.OnAdminChanging(value);
-					this.SendPropertyChanging();
-					this._Admin = value;
-					this.SendPropertyChanged("Admin");
-					this.OnAdminChanged();
-				}
-			}
-		}
-		
-		[global::System.Data.Linq.Mapping.ColumnAttribute(Storage="_Active", DbType="Bit")]
-		public System.Nullable<bool> Active
-		{
-			get
-			{
-				return this._Active;
-			}
-			set
-			{
-				if ((this._Active != value))
-				{
-					this.OnActiveChanging(value);
-					this.SendPropertyChanging();
-					this._Active = value;
-					this.SendPropertyChanged("Active");
-					this.OnActiveChanged();
-				}
-			}
-		}
-		
-		[global::System.Data.Linq.Mapping.ColumnAttribute(Storage="_Balance", DbType="Decimal(18,0)")]
-		public System.Nullable<decimal> Balance
-		{
-			get
-			{
-				return this._Balance;
-			}
-			set
-			{
-				if ((this._Balance != value))
-				{
-					this.OnBalanceChanging(value);
-					this.SendPropertyChanging();
-					this._Balance = value;
-					this.SendPropertyChanged("Balance");
-					this.OnBalanceChanged();
-				}
-			}
-		}
-		
-		public event PropertyChangingEventHandler PropertyChanging;
-		
-		public event PropertyChangedEventHandler PropertyChanged;
-		
-		protected virtual void SendPropertyChanging()
-		{
-			if ((this.PropertyChanging != null))
-			{
-				this.PropertyChanging(this, emptyChangingEventArgs);
-			}
-		}
-		
-		protected virtual void SendPropertyChanged(String propertyName)
-		{
-			if ((this.PropertyChanged != null))
-			{
-				this.PropertyChanged(this, new PropertyChangedEventArgs(propertyName));
+				return this.GetTable<Tour>();
 			}
 		}
 	}
@@ -1261,308 +1007,6 @@ namespace WebApplication1.Models
 		}
 	}
 	
-	[global::System.Data.Linq.Mapping.TableAttribute(Name="dbo.Orders")]
-	public partial class Order : INotifyPropertyChanging, INotifyPropertyChanged
-	{
-		
-		private static PropertyChangingEventArgs emptyChangingEventArgs = new PropertyChangingEventArgs(String.Empty);
-		
-		private int _OrderId;
-		
-		private System.Nullable<int> _TicketId;
-		
-		private System.Nullable<int> _Status;
-		
-		private System.Nullable<System.DateTime> _CreatedAt;
-		
-		private System.Nullable<System.DateTime> _DeletedAt;
-		
-		private string _QRCode;
-		
-		private System.Nullable<int> _CustomerId;
-		
-		private System.Nullable<decimal> _TotalPrice;
-		
-		private System.Nullable<int> _TicketGrowup;
-		
-		private System.Nullable<int> _TicketChild;
-		
-		private System.Nullable<int> _TourId;
-		
-    #region Extensibility Method Definitions
-    partial void OnLoaded();
-    partial void OnValidate(System.Data.Linq.ChangeAction action);
-    partial void OnCreated();
-    partial void OnOrderIdChanging(int value);
-    partial void OnOrderIdChanged();
-    partial void OnTicketIdChanging(System.Nullable<int> value);
-    partial void OnTicketIdChanged();
-    partial void OnStatusChanging(System.Nullable<int> value);
-    partial void OnStatusChanged();
-    partial void OnCreatedAtChanging(System.Nullable<System.DateTime> value);
-    partial void OnCreatedAtChanged();
-    partial void OnDeletedAtChanging(System.Nullable<System.DateTime> value);
-    partial void OnDeletedAtChanged();
-    partial void OnQRCodeChanging(string value);
-    partial void OnQRCodeChanged();
-    partial void OnCustomerIdChanging(System.Nullable<int> value);
-    partial void OnCustomerIdChanged();
-    partial void OnTotalPriceChanging(System.Nullable<decimal> value);
-    partial void OnTotalPriceChanged();
-    partial void OnTicketGrowupChanging(System.Nullable<int> value);
-    partial void OnTicketGrowupChanged();
-    partial void OnTicketChildChanging(System.Nullable<int> value);
-    partial void OnTicketChildChanged();
-    partial void OnTourIdChanging(System.Nullable<int> value);
-    partial void OnTourIdChanged();
-    #endregion
-		
-		public Order()
-		{
-			OnCreated();
-		}
-		
-		[global::System.Data.Linq.Mapping.ColumnAttribute(Storage="_OrderId", AutoSync=AutoSync.OnInsert, DbType="Int NOT NULL IDENTITY", IsPrimaryKey=true, IsDbGenerated=true)]
-		public int OrderId
-		{
-			get
-			{
-				return this._OrderId;
-			}
-			set
-			{
-				if ((this._OrderId != value))
-				{
-					this.OnOrderIdChanging(value);
-					this.SendPropertyChanging();
-					this._OrderId = value;
-					this.SendPropertyChanged("OrderId");
-					this.OnOrderIdChanged();
-				}
-			}
-		}
-		
-		[global::System.Data.Linq.Mapping.ColumnAttribute(Storage="_TicketId", DbType="Int")]
-		public System.Nullable<int> TicketId
-		{
-			get
-			{
-				return this._TicketId;
-			}
-			set
-			{
-				if ((this._TicketId != value))
-				{
-					this.OnTicketIdChanging(value);
-					this.SendPropertyChanging();
-					this._TicketId = value;
-					this.SendPropertyChanged("TicketId");
-					this.OnTicketIdChanged();
-				}
-			}
-		}
-		
-		[global::System.Data.Linq.Mapping.ColumnAttribute(Storage="_Status", DbType="Int")]
-		public System.Nullable<int> Status
-		{
-			get
-			{
-				return this._Status;
-			}
-			set
-			{
-				if ((this._Status != value))
-				{
-					this.OnStatusChanging(value);
-					this.SendPropertyChanging();
-					this._Status = value;
-					this.SendPropertyChanged("Status");
-					this.OnStatusChanged();
-				}
-			}
-		}
-		
-		[global::System.Data.Linq.Mapping.ColumnAttribute(Storage="_CreatedAt", DbType="DateTime")]
-		public System.Nullable<System.DateTime> CreatedAt
-		{
-			get
-			{
-				return this._CreatedAt;
-			}
-			set
-			{
-				if ((this._CreatedAt != value))
-				{
-					this.OnCreatedAtChanging(value);
-					this.SendPropertyChanging();
-					this._CreatedAt = value;
-					this.SendPropertyChanged("CreatedAt");
-					this.OnCreatedAtChanged();
-				}
-			}
-		}
-		
-		[global::System.Data.Linq.Mapping.ColumnAttribute(Storage="_DeletedAt", DbType="DateTime")]
-		public System.Nullable<System.DateTime> DeletedAt
-		{
-			get
-			{
-				return this._DeletedAt;
-			}
-			set
-			{
-				if ((this._DeletedAt != value))
-				{
-					this.OnDeletedAtChanging(value);
-					this.SendPropertyChanging();
-					this._DeletedAt = value;
-					this.SendPropertyChanged("DeletedAt");
-					this.OnDeletedAtChanged();
-				}
-			}
-		}
-		
-		[global::System.Data.Linq.Mapping.ColumnAttribute(Storage="_QRCode", DbType="NVarChar(MAX)")]
-		public string QRCode
-		{
-			get
-			{
-				return this._QRCode;
-			}
-			set
-			{
-				if ((this._QRCode != value))
-				{
-					this.OnQRCodeChanging(value);
-					this.SendPropertyChanging();
-					this._QRCode = value;
-					this.SendPropertyChanged("QRCode");
-					this.OnQRCodeChanged();
-				}
-			}
-		}
-		
-		[global::System.Data.Linq.Mapping.ColumnAttribute(Storage="_CustomerId", DbType="Int")]
-		public System.Nullable<int> CustomerId
-		{
-			get
-			{
-				return this._CustomerId;
-			}
-			set
-			{
-				if ((this._CustomerId != value))
-				{
-					this.OnCustomerIdChanging(value);
-					this.SendPropertyChanging();
-					this._CustomerId = value;
-					this.SendPropertyChanged("CustomerId");
-					this.OnCustomerIdChanged();
-				}
-			}
-		}
-		
-		[global::System.Data.Linq.Mapping.ColumnAttribute(Storage="_TotalPrice", DbType="Decimal(18,0)")]
-		public System.Nullable<decimal> TotalPrice
-		{
-			get
-			{
-				return this._TotalPrice;
-			}
-			set
-			{
-				if ((this._TotalPrice != value))
-				{
-					this.OnTotalPriceChanging(value);
-					this.SendPropertyChanging();
-					this._TotalPrice = value;
-					this.SendPropertyChanged("TotalPrice");
-					this.OnTotalPriceChanged();
-				}
-			}
-		}
-		
-		[global::System.Data.Linq.Mapping.ColumnAttribute(Storage="_TicketGrowup", DbType="Int")]
-		public System.Nullable<int> TicketGrowup
-		{
-			get
-			{
-				return this._TicketGrowup;
-			}
-			set
-			{
-				if ((this._TicketGrowup != value))
-				{
-					this.OnTicketGrowupChanging(value);
-					this.SendPropertyChanging();
-					this._TicketGrowup = value;
-					this.SendPropertyChanged("TicketGrowup");
-					this.OnTicketGrowupChanged();
-				}
-			}
-		}
-		
-		[global::System.Data.Linq.Mapping.ColumnAttribute(Storage="_TicketChild", DbType="Int")]
-		public System.Nullable<int> TicketChild
-		{
-			get
-			{
-				return this._TicketChild;
-			}
-			set
-			{
-				if ((this._TicketChild != value))
-				{
-					this.OnTicketChildChanging(value);
-					this.SendPropertyChanging();
-					this._TicketChild = value;
-					this.SendPropertyChanged("TicketChild");
-					this.OnTicketChildChanged();
-				}
-			}
-		}
-		
-		[global::System.Data.Linq.Mapping.ColumnAttribute(Storage="_TourId", DbType="Int")]
-		public System.Nullable<int> TourId
-		{
-			get
-			{
-				return this._TourId;
-			}
-			set
-			{
-				if ((this._TourId != value))
-				{
-					this.OnTourIdChanging(value);
-					this.SendPropertyChanging();
-					this._TourId = value;
-					this.SendPropertyChanged("TourId");
-					this.OnTourIdChanged();
-				}
-			}
-		}
-		
-		public event PropertyChangingEventHandler PropertyChanging;
-		
-		public event PropertyChangedEventHandler PropertyChanged;
-		
-		protected virtual void SendPropertyChanging()
-		{
-			if ((this.PropertyChanging != null))
-			{
-				this.PropertyChanging(this, emptyChangingEventArgs);
-			}
-		}
-		
-		protected virtual void SendPropertyChanged(String propertyName)
-		{
-			if ((this.PropertyChanged != null))
-			{
-				this.PropertyChanged(this, new PropertyChangedEventArgs(propertyName));
-			}
-		}
-	}
-	
 	[global::System.Data.Linq.Mapping.TableAttribute(Name="dbo.Staff")]
 	public partial class Staff : INotifyPropertyChanging, INotifyPropertyChanged
 	{
@@ -1816,466 +1260,6 @@ namespace WebApplication1.Models
 					this._AccountId = value;
 					this.SendPropertyChanged("AccountId");
 					this.OnAccountIdChanged();
-				}
-			}
-		}
-		
-		public event PropertyChangingEventHandler PropertyChanging;
-		
-		public event PropertyChangedEventHandler PropertyChanged;
-		
-		protected virtual void SendPropertyChanging()
-		{
-			if ((this.PropertyChanging != null))
-			{
-				this.PropertyChanging(this, emptyChangingEventArgs);
-			}
-		}
-		
-		protected virtual void SendPropertyChanged(String propertyName)
-		{
-			if ((this.PropertyChanged != null))
-			{
-				this.PropertyChanged(this, new PropertyChangedEventArgs(propertyName));
-			}
-		}
-	}
-	
-	[global::System.Data.Linq.Mapping.TableAttribute(Name="dbo.Ticket")]
-	public partial class Ticket : INotifyPropertyChanging, INotifyPropertyChanged
-	{
-		
-		private static PropertyChangingEventArgs emptyChangingEventArgs = new PropertyChangingEventArgs(String.Empty);
-		
-		private int _TicketId;
-		
-		private System.Nullable<int> _Status;
-		
-		private System.Nullable<int> _TicketType;
-		
-		private System.Nullable<decimal> _Price;
-		
-		private System.Nullable<int> _TourId;
-		
-    #region Extensibility Method Definitions
-    partial void OnLoaded();
-    partial void OnValidate(System.Data.Linq.ChangeAction action);
-    partial void OnCreated();
-    partial void OnTicketIdChanging(int value);
-    partial void OnTicketIdChanged();
-    partial void OnStatusChanging(System.Nullable<int> value);
-    partial void OnStatusChanged();
-    partial void OnTicketTypeChanging(System.Nullable<int> value);
-    partial void OnTicketTypeChanged();
-    partial void OnPriceChanging(System.Nullable<decimal> value);
-    partial void OnPriceChanged();
-    partial void OnTourIdChanging(System.Nullable<int> value);
-    partial void OnTourIdChanged();
-    #endregion
-		
-		public Ticket()
-		{
-			OnCreated();
-		}
-		
-		[global::System.Data.Linq.Mapping.ColumnAttribute(Storage="_TicketId", AutoSync=AutoSync.OnInsert, DbType="Int NOT NULL IDENTITY", IsPrimaryKey=true, IsDbGenerated=true)]
-		public int TicketId
-		{
-			get
-			{
-				return this._TicketId;
-			}
-			set
-			{
-				if ((this._TicketId != value))
-				{
-					this.OnTicketIdChanging(value);
-					this.SendPropertyChanging();
-					this._TicketId = value;
-					this.SendPropertyChanged("TicketId");
-					this.OnTicketIdChanged();
-				}
-			}
-		}
-		
-		[global::System.Data.Linq.Mapping.ColumnAttribute(Storage="_Status", DbType="Int")]
-		public System.Nullable<int> Status
-		{
-			get
-			{
-				return this._Status;
-			}
-			set
-			{
-				if ((this._Status != value))
-				{
-					this.OnStatusChanging(value);
-					this.SendPropertyChanging();
-					this._Status = value;
-					this.SendPropertyChanged("Status");
-					this.OnStatusChanged();
-				}
-			}
-		}
-		
-		[global::System.Data.Linq.Mapping.ColumnAttribute(Storage="_TicketType", DbType="Int")]
-		public System.Nullable<int> TicketType
-		{
-			get
-			{
-				return this._TicketType;
-			}
-			set
-			{
-				if ((this._TicketType != value))
-				{
-					this.OnTicketTypeChanging(value);
-					this.SendPropertyChanging();
-					this._TicketType = value;
-					this.SendPropertyChanged("TicketType");
-					this.OnTicketTypeChanged();
-				}
-			}
-		}
-		
-		[global::System.Data.Linq.Mapping.ColumnAttribute(Storage="_Price", DbType="Decimal(18,0)")]
-		public System.Nullable<decimal> Price
-		{
-			get
-			{
-				return this._Price;
-			}
-			set
-			{
-				if ((this._Price != value))
-				{
-					this.OnPriceChanging(value);
-					this.SendPropertyChanging();
-					this._Price = value;
-					this.SendPropertyChanged("Price");
-					this.OnPriceChanged();
-				}
-			}
-		}
-		
-		[global::System.Data.Linq.Mapping.ColumnAttribute(Storage="_TourId", DbType="Int")]
-		public System.Nullable<int> TourId
-		{
-			get
-			{
-				return this._TourId;
-			}
-			set
-			{
-				if ((this._TourId != value))
-				{
-					this.OnTourIdChanging(value);
-					this.SendPropertyChanging();
-					this._TourId = value;
-					this.SendPropertyChanged("TourId");
-					this.OnTourIdChanged();
-				}
-			}
-		}
-		
-		public event PropertyChangingEventHandler PropertyChanging;
-		
-		public event PropertyChangedEventHandler PropertyChanged;
-		
-		protected virtual void SendPropertyChanging()
-		{
-			if ((this.PropertyChanging != null))
-			{
-				this.PropertyChanging(this, emptyChangingEventArgs);
-			}
-		}
-		
-		protected virtual void SendPropertyChanged(String propertyName)
-		{
-			if ((this.PropertyChanged != null))
-			{
-				this.PropertyChanged(this, new PropertyChangedEventArgs(propertyName));
-			}
-		}
-	}
-	
-	[global::System.Data.Linq.Mapping.TableAttribute(Name="dbo.Tour")]
-	public partial class Tour : INotifyPropertyChanging, INotifyPropertyChanged
-	{
-		
-		private static PropertyChangingEventArgs emptyChangingEventArgs = new PropertyChangingEventArgs(String.Empty);
-		
-		private int _TourId;
-		
-		private string _TourName;
-		
-		private System.Nullable<System.DateTime> _StartDate;
-		
-		private System.Nullable<System.DateTime> _EndDate;
-		
-		private string _TourTime;
-		
-		private string _LocationFrom;
-		
-		private string _LocationTo;
-		
-		private System.Nullable<decimal> _Price;
-		
-		private string _Poster;
-		
-		private string _Descrip;
-		
-		private System.Nullable<int> _VehicleId;
-		
-    #region Extensibility Method Definitions
-    partial void OnLoaded();
-    partial void OnValidate(System.Data.Linq.ChangeAction action);
-    partial void OnCreated();
-    partial void OnTourIdChanging(int value);
-    partial void OnTourIdChanged();
-    partial void OnTourNameChanging(string value);
-    partial void OnTourNameChanged();
-    partial void OnStartDateChanging(System.Nullable<System.DateTime> value);
-    partial void OnStartDateChanged();
-    partial void OnEndDateChanging(System.Nullable<System.DateTime> value);
-    partial void OnEndDateChanged();
-    partial void OnTourTimeChanging(string value);
-    partial void OnTourTimeChanged();
-    partial void OnLocationFromChanging(string value);
-    partial void OnLocationFromChanged();
-    partial void OnLocationToChanging(string value);
-    partial void OnLocationToChanged();
-    partial void OnPriceChanging(System.Nullable<decimal> value);
-    partial void OnPriceChanged();
-    partial void OnPosterChanging(string value);
-    partial void OnPosterChanged();
-    partial void OnDescripChanging(string value);
-    partial void OnDescripChanged();
-    partial void OnVehicleIdChanging(System.Nullable<int> value);
-    partial void OnVehicleIdChanged();
-    #endregion
-		
-		public Tour()
-		{
-			OnCreated();
-		}
-		
-		[global::System.Data.Linq.Mapping.ColumnAttribute(Storage="_TourId", AutoSync=AutoSync.OnInsert, DbType="Int NOT NULL IDENTITY", IsPrimaryKey=true, IsDbGenerated=true)]
-		public int TourId
-		{
-			get
-			{
-				return this._TourId;
-			}
-			set
-			{
-				if ((this._TourId != value))
-				{
-					this.OnTourIdChanging(value);
-					this.SendPropertyChanging();
-					this._TourId = value;
-					this.SendPropertyChanged("TourId");
-					this.OnTourIdChanged();
-				}
-			}
-		}
-		
-		[global::System.Data.Linq.Mapping.ColumnAttribute(Storage="_TourName", DbType="NVarChar(MAX)")]
-		public string TourName
-		{
-			get
-			{
-				return this._TourName;
-			}
-			set
-			{
-				if ((this._TourName != value))
-				{
-					this.OnTourNameChanging(value);
-					this.SendPropertyChanging();
-					this._TourName = value;
-					this.SendPropertyChanged("TourName");
-					this.OnTourNameChanged();
-				}
-			}
-		}
-		
-		[global::System.Data.Linq.Mapping.ColumnAttribute(Storage="_StartDate", DbType="Date")]
-		public System.Nullable<System.DateTime> StartDate
-		{
-			get
-			{
-				return this._StartDate;
-			}
-			set
-			{
-				if ((this._StartDate != value))
-				{
-					this.OnStartDateChanging(value);
-					this.SendPropertyChanging();
-					this._StartDate = value;
-					this.SendPropertyChanged("StartDate");
-					this.OnStartDateChanged();
-				}
-			}
-		}
-		
-		[global::System.Data.Linq.Mapping.ColumnAttribute(Storage="_EndDate", DbType="Date")]
-		public System.Nullable<System.DateTime> EndDate
-		{
-			get
-			{
-				return this._EndDate;
-			}
-			set
-			{
-				if ((this._EndDate != value))
-				{
-					this.OnEndDateChanging(value);
-					this.SendPropertyChanging();
-					this._EndDate = value;
-					this.SendPropertyChanged("EndDate");
-					this.OnEndDateChanged();
-				}
-			}
-		}
-		
-		[global::System.Data.Linq.Mapping.ColumnAttribute(Storage="_TourTime", DbType="NVarChar(MAX)")]
-		public string TourTime
-		{
-			get
-			{
-				return this._TourTime;
-			}
-			set
-			{
-				if ((this._TourTime != value))
-				{
-					this.OnTourTimeChanging(value);
-					this.SendPropertyChanging();
-					this._TourTime = value;
-					this.SendPropertyChanged("TourTime");
-					this.OnTourTimeChanged();
-				}
-			}
-		}
-		
-		[global::System.Data.Linq.Mapping.ColumnAttribute(Storage="_LocationFrom", DbType="NVarChar(MAX)")]
-		public string LocationFrom
-		{
-			get
-			{
-				return this._LocationFrom;
-			}
-			set
-			{
-				if ((this._LocationFrom != value))
-				{
-					this.OnLocationFromChanging(value);
-					this.SendPropertyChanging();
-					this._LocationFrom = value;
-					this.SendPropertyChanged("LocationFrom");
-					this.OnLocationFromChanged();
-				}
-			}
-		}
-		
-		[global::System.Data.Linq.Mapping.ColumnAttribute(Storage="_LocationTo", DbType="NVarChar(MAX)")]
-		public string LocationTo
-		{
-			get
-			{
-				return this._LocationTo;
-			}
-			set
-			{
-				if ((this._LocationTo != value))
-				{
-					this.OnLocationToChanging(value);
-					this.SendPropertyChanging();
-					this._LocationTo = value;
-					this.SendPropertyChanged("LocationTo");
-					this.OnLocationToChanged();
-				}
-			}
-		}
-		
-		[global::System.Data.Linq.Mapping.ColumnAttribute(Storage="_Price", DbType="Decimal(18,0)")]
-		public System.Nullable<decimal> Price
-		{
-			get
-			{
-				return this._Price;
-			}
-			set
-			{
-				if ((this._Price != value))
-				{
-					this.OnPriceChanging(value);
-					this.SendPropertyChanging();
-					this._Price = value;
-					this.SendPropertyChanged("Price");
-					this.OnPriceChanged();
-				}
-			}
-		}
-		
-		[global::System.Data.Linq.Mapping.ColumnAttribute(Storage="_Poster", DbType="NVarChar(MAX)")]
-		public string Poster
-		{
-			get
-			{
-				return this._Poster;
-			}
-			set
-			{
-				if ((this._Poster != value))
-				{
-					this.OnPosterChanging(value);
-					this.SendPropertyChanging();
-					this._Poster = value;
-					this.SendPropertyChanged("Poster");
-					this.OnPosterChanged();
-				}
-			}
-		}
-		
-		[global::System.Data.Linq.Mapping.ColumnAttribute(Storage="_Descrip", DbType="NVarChar(MAX)")]
-		public string Descrip
-		{
-			get
-			{
-				return this._Descrip;
-			}
-			set
-			{
-				if ((this._Descrip != value))
-				{
-					this.OnDescripChanging(value);
-					this.SendPropertyChanging();
-					this._Descrip = value;
-					this.SendPropertyChanged("Descrip");
-					this.OnDescripChanged();
-				}
-			}
-		}
-		
-		[global::System.Data.Linq.Mapping.ColumnAttribute(Storage="_VehicleId", DbType="Int")]
-		public System.Nullable<int> VehicleId
-		{
-			get
-			{
-				return this._VehicleId;
-			}
-			set
-			{
-				if ((this._VehicleId != value))
-				{
-					this.OnVehicleIdChanging(value);
-					this.SendPropertyChanging();
-					this._VehicleId = value;
-					this.SendPropertyChanged("VehicleId");
-					this.OnVehicleIdChanged();
 				}
 			}
 		}
@@ -2836,6 +1820,1022 @@ namespace WebApplication1.Models
 					this._Slot = value;
 					this.SendPropertyChanged("Slot");
 					this.OnSlotChanged();
+				}
+			}
+		}
+		
+		public event PropertyChangingEventHandler PropertyChanging;
+		
+		public event PropertyChangedEventHandler PropertyChanged;
+		
+		protected virtual void SendPropertyChanging()
+		{
+			if ((this.PropertyChanging != null))
+			{
+				this.PropertyChanging(this, emptyChangingEventArgs);
+			}
+		}
+		
+		protected virtual void SendPropertyChanged(String propertyName)
+		{
+			if ((this.PropertyChanged != null))
+			{
+				this.PropertyChanged(this, new PropertyChangedEventArgs(propertyName));
+			}
+		}
+	}
+	
+	[global::System.Data.Linq.Mapping.TableAttribute(Name="dbo.Orders")]
+	public partial class Order : INotifyPropertyChanging, INotifyPropertyChanged
+	{
+		
+		private static PropertyChangingEventArgs emptyChangingEventArgs = new PropertyChangingEventArgs(String.Empty);
+		
+		private int _OrderId;
+		
+		private System.Nullable<int> _TicketId;
+		
+		private System.Nullable<int> _Status;
+		
+		private System.Nullable<System.DateTime> _CreatedAt;
+		
+		private System.Nullable<System.DateTime> _DeletedAt;
+		
+		private string _QRCode;
+		
+		private System.Nullable<int> _CustomerId;
+		
+		private System.Nullable<double> _TotalPrice;
+		
+		private System.Nullable<int> _TicketGrowup;
+		
+		private System.Nullable<int> _TicketChild;
+		
+		private System.Nullable<int> _TourId;
+		
+    #region Extensibility Method Definitions
+    partial void OnLoaded();
+    partial void OnValidate(System.Data.Linq.ChangeAction action);
+    partial void OnCreated();
+    partial void OnOrderIdChanging(int value);
+    partial void OnOrderIdChanged();
+    partial void OnTicketIdChanging(System.Nullable<int> value);
+    partial void OnTicketIdChanged();
+    partial void OnStatusChanging(System.Nullable<int> value);
+    partial void OnStatusChanged();
+    partial void OnCreatedAtChanging(System.Nullable<System.DateTime> value);
+    partial void OnCreatedAtChanged();
+    partial void OnDeletedAtChanging(System.Nullable<System.DateTime> value);
+    partial void OnDeletedAtChanged();
+    partial void OnQRCodeChanging(string value);
+    partial void OnQRCodeChanged();
+    partial void OnCustomerIdChanging(System.Nullable<int> value);
+    partial void OnCustomerIdChanged();
+    partial void OnTotalPriceChanging(System.Nullable<double> value);
+    partial void OnTotalPriceChanged();
+    partial void OnTicketGrowupChanging(System.Nullable<int> value);
+    partial void OnTicketGrowupChanged();
+    partial void OnTicketChildChanging(System.Nullable<int> value);
+    partial void OnTicketChildChanged();
+    partial void OnTourIdChanging(System.Nullable<int> value);
+    partial void OnTourIdChanged();
+    #endregion
+		
+		public Order()
+		{
+			OnCreated();
+		}
+		
+		[global::System.Data.Linq.Mapping.ColumnAttribute(Storage="_OrderId", AutoSync=AutoSync.OnInsert, DbType="Int NOT NULL IDENTITY", IsPrimaryKey=true, IsDbGenerated=true)]
+		public int OrderId
+		{
+			get
+			{
+				return this._OrderId;
+			}
+			set
+			{
+				if ((this._OrderId != value))
+				{
+					this.OnOrderIdChanging(value);
+					this.SendPropertyChanging();
+					this._OrderId = value;
+					this.SendPropertyChanged("OrderId");
+					this.OnOrderIdChanged();
+				}
+			}
+		}
+		
+		[global::System.Data.Linq.Mapping.ColumnAttribute(Storage="_TicketId", DbType="Int")]
+		public System.Nullable<int> TicketId
+		{
+			get
+			{
+				return this._TicketId;
+			}
+			set
+			{
+				if ((this._TicketId != value))
+				{
+					this.OnTicketIdChanging(value);
+					this.SendPropertyChanging();
+					this._TicketId = value;
+					this.SendPropertyChanged("TicketId");
+					this.OnTicketIdChanged();
+				}
+			}
+		}
+		
+		[global::System.Data.Linq.Mapping.ColumnAttribute(Storage="_Status", DbType="Int")]
+		public System.Nullable<int> Status
+		{
+			get
+			{
+				return this._Status;
+			}
+			set
+			{
+				if ((this._Status != value))
+				{
+					this.OnStatusChanging(value);
+					this.SendPropertyChanging();
+					this._Status = value;
+					this.SendPropertyChanged("Status");
+					this.OnStatusChanged();
+				}
+			}
+		}
+		
+		[global::System.Data.Linq.Mapping.ColumnAttribute(Storage="_CreatedAt", DbType="DateTime")]
+		public System.Nullable<System.DateTime> CreatedAt
+		{
+			get
+			{
+				return this._CreatedAt;
+			}
+			set
+			{
+				if ((this._CreatedAt != value))
+				{
+					this.OnCreatedAtChanging(value);
+					this.SendPropertyChanging();
+					this._CreatedAt = value;
+					this.SendPropertyChanged("CreatedAt");
+					this.OnCreatedAtChanged();
+				}
+			}
+		}
+		
+		[global::System.Data.Linq.Mapping.ColumnAttribute(Storage="_DeletedAt", DbType="DateTime")]
+		public System.Nullable<System.DateTime> DeletedAt
+		{
+			get
+			{
+				return this._DeletedAt;
+			}
+			set
+			{
+				if ((this._DeletedAt != value))
+				{
+					this.OnDeletedAtChanging(value);
+					this.SendPropertyChanging();
+					this._DeletedAt = value;
+					this.SendPropertyChanged("DeletedAt");
+					this.OnDeletedAtChanged();
+				}
+			}
+		}
+		
+		[global::System.Data.Linq.Mapping.ColumnAttribute(Storage="_QRCode", DbType="NVarChar(MAX)")]
+		public string QRCode
+		{
+			get
+			{
+				return this._QRCode;
+			}
+			set
+			{
+				if ((this._QRCode != value))
+				{
+					this.OnQRCodeChanging(value);
+					this.SendPropertyChanging();
+					this._QRCode = value;
+					this.SendPropertyChanged("QRCode");
+					this.OnQRCodeChanged();
+				}
+			}
+		}
+		
+		[global::System.Data.Linq.Mapping.ColumnAttribute(Storage="_CustomerId", DbType="Int")]
+		public System.Nullable<int> CustomerId
+		{
+			get
+			{
+				return this._CustomerId;
+			}
+			set
+			{
+				if ((this._CustomerId != value))
+				{
+					this.OnCustomerIdChanging(value);
+					this.SendPropertyChanging();
+					this._CustomerId = value;
+					this.SendPropertyChanged("CustomerId");
+					this.OnCustomerIdChanged();
+				}
+			}
+		}
+		
+		[global::System.Data.Linq.Mapping.ColumnAttribute(Storage="_TotalPrice", DbType="Float")]
+		public System.Nullable<double> TotalPrice
+		{
+			get
+			{
+				return this._TotalPrice;
+			}
+			set
+			{
+				if ((this._TotalPrice != value))
+				{
+					this.OnTotalPriceChanging(value);
+					this.SendPropertyChanging();
+					this._TotalPrice = value;
+					this.SendPropertyChanged("TotalPrice");
+					this.OnTotalPriceChanged();
+				}
+			}
+		}
+		
+		[global::System.Data.Linq.Mapping.ColumnAttribute(Storage="_TicketGrowup", DbType="Int")]
+		public System.Nullable<int> TicketGrowup
+		{
+			get
+			{
+				return this._TicketGrowup;
+			}
+			set
+			{
+				if ((this._TicketGrowup != value))
+				{
+					this.OnTicketGrowupChanging(value);
+					this.SendPropertyChanging();
+					this._TicketGrowup = value;
+					this.SendPropertyChanged("TicketGrowup");
+					this.OnTicketGrowupChanged();
+				}
+			}
+		}
+		
+		[global::System.Data.Linq.Mapping.ColumnAttribute(Storage="_TicketChild", DbType="Int")]
+		public System.Nullable<int> TicketChild
+		{
+			get
+			{
+				return this._TicketChild;
+			}
+			set
+			{
+				if ((this._TicketChild != value))
+				{
+					this.OnTicketChildChanging(value);
+					this.SendPropertyChanging();
+					this._TicketChild = value;
+					this.SendPropertyChanged("TicketChild");
+					this.OnTicketChildChanged();
+				}
+			}
+		}
+		
+		[global::System.Data.Linq.Mapping.ColumnAttribute(Storage="_TourId", DbType="Int")]
+		public System.Nullable<int> TourId
+		{
+			get
+			{
+				return this._TourId;
+			}
+			set
+			{
+				if ((this._TourId != value))
+				{
+					this.OnTourIdChanging(value);
+					this.SendPropertyChanging();
+					this._TourId = value;
+					this.SendPropertyChanged("TourId");
+					this.OnTourIdChanged();
+				}
+			}
+		}
+		
+		public event PropertyChangingEventHandler PropertyChanging;
+		
+		public event PropertyChangedEventHandler PropertyChanged;
+		
+		protected virtual void SendPropertyChanging()
+		{
+			if ((this.PropertyChanging != null))
+			{
+				this.PropertyChanging(this, emptyChangingEventArgs);
+			}
+		}
+		
+		protected virtual void SendPropertyChanged(String propertyName)
+		{
+			if ((this.PropertyChanged != null))
+			{
+				this.PropertyChanged(this, new PropertyChangedEventArgs(propertyName));
+			}
+		}
+	}
+	
+	[global::System.Data.Linq.Mapping.TableAttribute(Name="dbo.Account")]
+	public partial class Account : INotifyPropertyChanging, INotifyPropertyChanged
+	{
+		
+		private static PropertyChangingEventArgs emptyChangingEventArgs = new PropertyChangingEventArgs(String.Empty);
+		
+		private int _AccountId;
+		
+		private string _UserName;
+		
+		private string _Password;
+		
+		private string _Email;
+		
+		private string _Phone;
+		
+		private System.Nullable<int> _AccountType;
+		
+		private System.Nullable<bool> _Admin;
+		
+		private System.Nullable<bool> _Active;
+		
+		private System.Nullable<double> _Balance;
+		
+    #region Extensibility Method Definitions
+    partial void OnLoaded();
+    partial void OnValidate(System.Data.Linq.ChangeAction action);
+    partial void OnCreated();
+    partial void OnAccountIdChanging(int value);
+    partial void OnAccountIdChanged();
+    partial void OnUserNameChanging(string value);
+    partial void OnUserNameChanged();
+    partial void OnPasswordChanging(string value);
+    partial void OnPasswordChanged();
+    partial void OnEmailChanging(string value);
+    partial void OnEmailChanged();
+    partial void OnPhoneChanging(string value);
+    partial void OnPhoneChanged();
+    partial void OnAccountTypeChanging(System.Nullable<int> value);
+    partial void OnAccountTypeChanged();
+    partial void OnAdminChanging(System.Nullable<bool> value);
+    partial void OnAdminChanged();
+    partial void OnActiveChanging(System.Nullable<bool> value);
+    partial void OnActiveChanged();
+    partial void OnBalanceChanging(System.Nullable<double> value);
+    partial void OnBalanceChanged();
+    #endregion
+		
+		public Account()
+		{
+			OnCreated();
+		}
+		
+		[global::System.Data.Linq.Mapping.ColumnAttribute(Storage="_AccountId", AutoSync=AutoSync.OnInsert, DbType="Int NOT NULL IDENTITY", IsPrimaryKey=true, IsDbGenerated=true)]
+		public int AccountId
+		{
+			get
+			{
+				return this._AccountId;
+			}
+			set
+			{
+				if ((this._AccountId != value))
+				{
+					this.OnAccountIdChanging(value);
+					this.SendPropertyChanging();
+					this._AccountId = value;
+					this.SendPropertyChanged("AccountId");
+					this.OnAccountIdChanged();
+				}
+			}
+		}
+		
+		[global::System.Data.Linq.Mapping.ColumnAttribute(Storage="_UserName", DbType="NVarChar(50)")]
+		public string UserName
+		{
+			get
+			{
+				return this._UserName;
+			}
+			set
+			{
+				if ((this._UserName != value))
+				{
+					this.OnUserNameChanging(value);
+					this.SendPropertyChanging();
+					this._UserName = value;
+					this.SendPropertyChanged("UserName");
+					this.OnUserNameChanged();
+				}
+			}
+		}
+		
+		[global::System.Data.Linq.Mapping.ColumnAttribute(Storage="_Password", DbType="NVarChar(50)")]
+		public string Password
+		{
+			get
+			{
+				return this._Password;
+			}
+			set
+			{
+				if ((this._Password != value))
+				{
+					this.OnPasswordChanging(value);
+					this.SendPropertyChanging();
+					this._Password = value;
+					this.SendPropertyChanged("Password");
+					this.OnPasswordChanged();
+				}
+			}
+		}
+		
+		[global::System.Data.Linq.Mapping.ColumnAttribute(Storage="_Email", DbType="NVarChar(50)")]
+		public string Email
+		{
+			get
+			{
+				return this._Email;
+			}
+			set
+			{
+				if ((this._Email != value))
+				{
+					this.OnEmailChanging(value);
+					this.SendPropertyChanging();
+					this._Email = value;
+					this.SendPropertyChanged("Email");
+					this.OnEmailChanged();
+				}
+			}
+		}
+		
+		[global::System.Data.Linq.Mapping.ColumnAttribute(Storage="_Phone", DbType="NVarChar(50)")]
+		public string Phone
+		{
+			get
+			{
+				return this._Phone;
+			}
+			set
+			{
+				if ((this._Phone != value))
+				{
+					this.OnPhoneChanging(value);
+					this.SendPropertyChanging();
+					this._Phone = value;
+					this.SendPropertyChanged("Phone");
+					this.OnPhoneChanged();
+				}
+			}
+		}
+		
+		[global::System.Data.Linq.Mapping.ColumnAttribute(Storage="_AccountType", DbType="Int")]
+		public System.Nullable<int> AccountType
+		{
+			get
+			{
+				return this._AccountType;
+			}
+			set
+			{
+				if ((this._AccountType != value))
+				{
+					this.OnAccountTypeChanging(value);
+					this.SendPropertyChanging();
+					this._AccountType = value;
+					this.SendPropertyChanged("AccountType");
+					this.OnAccountTypeChanged();
+				}
+			}
+		}
+		
+		[global::System.Data.Linq.Mapping.ColumnAttribute(Storage="_Admin", DbType="Bit")]
+		public System.Nullable<bool> Admin
+		{
+			get
+			{
+				return this._Admin;
+			}
+			set
+			{
+				if ((this._Admin != value))
+				{
+					this.OnAdminChanging(value);
+					this.SendPropertyChanging();
+					this._Admin = value;
+					this.SendPropertyChanged("Admin");
+					this.OnAdminChanged();
+				}
+			}
+		}
+		
+		[global::System.Data.Linq.Mapping.ColumnAttribute(Storage="_Active", DbType="Bit")]
+		public System.Nullable<bool> Active
+		{
+			get
+			{
+				return this._Active;
+			}
+			set
+			{
+				if ((this._Active != value))
+				{
+					this.OnActiveChanging(value);
+					this.SendPropertyChanging();
+					this._Active = value;
+					this.SendPropertyChanged("Active");
+					this.OnActiveChanged();
+				}
+			}
+		}
+		
+		[global::System.Data.Linq.Mapping.ColumnAttribute(Storage="_Balance", DbType="Float")]
+		public System.Nullable<double> Balance
+		{
+			get
+			{
+				return this._Balance;
+			}
+			set
+			{
+				if ((this._Balance != value))
+				{
+					this.OnBalanceChanging(value);
+					this.SendPropertyChanging();
+					this._Balance = value;
+					this.SendPropertyChanged("Balance");
+					this.OnBalanceChanged();
+				}
+			}
+		}
+		
+		public event PropertyChangingEventHandler PropertyChanging;
+		
+		public event PropertyChangedEventHandler PropertyChanged;
+		
+		protected virtual void SendPropertyChanging()
+		{
+			if ((this.PropertyChanging != null))
+			{
+				this.PropertyChanging(this, emptyChangingEventArgs);
+			}
+		}
+		
+		protected virtual void SendPropertyChanged(String propertyName)
+		{
+			if ((this.PropertyChanged != null))
+			{
+				this.PropertyChanged(this, new PropertyChangedEventArgs(propertyName));
+			}
+		}
+	}
+	
+	[global::System.Data.Linq.Mapping.TableAttribute(Name="dbo.Ticket")]
+	public partial class Ticket : INotifyPropertyChanging, INotifyPropertyChanged
+	{
+		
+		private static PropertyChangingEventArgs emptyChangingEventArgs = new PropertyChangingEventArgs(String.Empty);
+		
+		private int _TicketId;
+		
+		private System.Nullable<int> _Status;
+		
+		private System.Nullable<int> _TicketType;
+		
+		private System.Nullable<double> _Price;
+		
+		private System.Nullable<int> _TourId;
+		
+    #region Extensibility Method Definitions
+    partial void OnLoaded();
+    partial void OnValidate(System.Data.Linq.ChangeAction action);
+    partial void OnCreated();
+    partial void OnTicketIdChanging(int value);
+    partial void OnTicketIdChanged();
+    partial void OnStatusChanging(System.Nullable<int> value);
+    partial void OnStatusChanged();
+    partial void OnTicketTypeChanging(System.Nullable<int> value);
+    partial void OnTicketTypeChanged();
+    partial void OnPriceChanging(System.Nullable<double> value);
+    partial void OnPriceChanged();
+    partial void OnTourIdChanging(System.Nullable<int> value);
+    partial void OnTourIdChanged();
+    #endregion
+		
+		public Ticket()
+		{
+			OnCreated();
+		}
+		
+		[global::System.Data.Linq.Mapping.ColumnAttribute(Storage="_TicketId", AutoSync=AutoSync.OnInsert, DbType="Int NOT NULL IDENTITY", IsPrimaryKey=true, IsDbGenerated=true)]
+		public int TicketId
+		{
+			get
+			{
+				return this._TicketId;
+			}
+			set
+			{
+				if ((this._TicketId != value))
+				{
+					this.OnTicketIdChanging(value);
+					this.SendPropertyChanging();
+					this._TicketId = value;
+					this.SendPropertyChanged("TicketId");
+					this.OnTicketIdChanged();
+				}
+			}
+		}
+		
+		[global::System.Data.Linq.Mapping.ColumnAttribute(Storage="_Status", DbType="Int")]
+		public System.Nullable<int> Status
+		{
+			get
+			{
+				return this._Status;
+			}
+			set
+			{
+				if ((this._Status != value))
+				{
+					this.OnStatusChanging(value);
+					this.SendPropertyChanging();
+					this._Status = value;
+					this.SendPropertyChanged("Status");
+					this.OnStatusChanged();
+				}
+			}
+		}
+		
+		[global::System.Data.Linq.Mapping.ColumnAttribute(Storage="_TicketType", DbType="Int")]
+		public System.Nullable<int> TicketType
+		{
+			get
+			{
+				return this._TicketType;
+			}
+			set
+			{
+				if ((this._TicketType != value))
+				{
+					this.OnTicketTypeChanging(value);
+					this.SendPropertyChanging();
+					this._TicketType = value;
+					this.SendPropertyChanged("TicketType");
+					this.OnTicketTypeChanged();
+				}
+			}
+		}
+		
+		[global::System.Data.Linq.Mapping.ColumnAttribute(Storage="_Price", DbType="Float")]
+		public System.Nullable<double> Price
+		{
+			get
+			{
+				return this._Price;
+			}
+			set
+			{
+				if ((this._Price != value))
+				{
+					this.OnPriceChanging(value);
+					this.SendPropertyChanging();
+					this._Price = value;
+					this.SendPropertyChanged("Price");
+					this.OnPriceChanged();
+				}
+			}
+		}
+		
+		[global::System.Data.Linq.Mapping.ColumnAttribute(Storage="_TourId", DbType="Int")]
+		public System.Nullable<int> TourId
+		{
+			get
+			{
+				return this._TourId;
+			}
+			set
+			{
+				if ((this._TourId != value))
+				{
+					this.OnTourIdChanging(value);
+					this.SendPropertyChanging();
+					this._TourId = value;
+					this.SendPropertyChanged("TourId");
+					this.OnTourIdChanged();
+				}
+			}
+		}
+		
+		public event PropertyChangingEventHandler PropertyChanging;
+		
+		public event PropertyChangedEventHandler PropertyChanged;
+		
+		protected virtual void SendPropertyChanging()
+		{
+			if ((this.PropertyChanging != null))
+			{
+				this.PropertyChanging(this, emptyChangingEventArgs);
+			}
+		}
+		
+		protected virtual void SendPropertyChanged(String propertyName)
+		{
+			if ((this.PropertyChanged != null))
+			{
+				this.PropertyChanged(this, new PropertyChangedEventArgs(propertyName));
+			}
+		}
+	}
+	
+	[global::System.Data.Linq.Mapping.TableAttribute(Name="dbo.Tour")]
+	public partial class Tour : INotifyPropertyChanging, INotifyPropertyChanged
+	{
+		
+		private static PropertyChangingEventArgs emptyChangingEventArgs = new PropertyChangingEventArgs(String.Empty);
+		
+		private int _TourId;
+		
+		private string _TourName;
+		
+		private System.Nullable<System.DateTime> _StartDate;
+		
+		private System.Nullable<System.DateTime> _EndDate;
+		
+		private string _TourTime;
+		
+		private string _LocationFrom;
+		
+		private string _LocationTo;
+		
+		private System.Nullable<double> _Price;
+		
+		private string _Poster;
+		
+		private string _Descrip;
+		
+		private System.Nullable<int> _VehicleId;
+		
+    #region Extensibility Method Definitions
+    partial void OnLoaded();
+    partial void OnValidate(System.Data.Linq.ChangeAction action);
+    partial void OnCreated();
+    partial void OnTourIdChanging(int value);
+    partial void OnTourIdChanged();
+    partial void OnTourNameChanging(string value);
+    partial void OnTourNameChanged();
+    partial void OnStartDateChanging(System.Nullable<System.DateTime> value);
+    partial void OnStartDateChanged();
+    partial void OnEndDateChanging(System.Nullable<System.DateTime> value);
+    partial void OnEndDateChanged();
+    partial void OnTourTimeChanging(string value);
+    partial void OnTourTimeChanged();
+    partial void OnLocationFromChanging(string value);
+    partial void OnLocationFromChanged();
+    partial void OnLocationToChanging(string value);
+    partial void OnLocationToChanged();
+    partial void OnPriceChanging(System.Nullable<double> value);
+    partial void OnPriceChanged();
+    partial void OnPosterChanging(string value);
+    partial void OnPosterChanged();
+    partial void OnDescripChanging(string value);
+    partial void OnDescripChanged();
+    partial void OnVehicleIdChanging(System.Nullable<int> value);
+    partial void OnVehicleIdChanged();
+    #endregion
+		
+		public Tour()
+		{
+			OnCreated();
+		}
+		
+		[global::System.Data.Linq.Mapping.ColumnAttribute(Storage="_TourId", AutoSync=AutoSync.OnInsert, DbType="Int NOT NULL IDENTITY", IsPrimaryKey=true, IsDbGenerated=true)]
+		public int TourId
+		{
+			get
+			{
+				return this._TourId;
+			}
+			set
+			{
+				if ((this._TourId != value))
+				{
+					this.OnTourIdChanging(value);
+					this.SendPropertyChanging();
+					this._TourId = value;
+					this.SendPropertyChanged("TourId");
+					this.OnTourIdChanged();
+				}
+			}
+		}
+		
+		[global::System.Data.Linq.Mapping.ColumnAttribute(Storage="_TourName", DbType="NVarChar(MAX)")]
+		public string TourName
+		{
+			get
+			{
+				return this._TourName;
+			}
+			set
+			{
+				if ((this._TourName != value))
+				{
+					this.OnTourNameChanging(value);
+					this.SendPropertyChanging();
+					this._TourName = value;
+					this.SendPropertyChanged("TourName");
+					this.OnTourNameChanged();
+				}
+			}
+		}
+		
+		[global::System.Data.Linq.Mapping.ColumnAttribute(Storage="_StartDate", DbType="Date")]
+		public System.Nullable<System.DateTime> StartDate
+		{
+			get
+			{
+				return this._StartDate;
+			}
+			set
+			{
+				if ((this._StartDate != value))
+				{
+					this.OnStartDateChanging(value);
+					this.SendPropertyChanging();
+					this._StartDate = value;
+					this.SendPropertyChanged("StartDate");
+					this.OnStartDateChanged();
+				}
+			}
+		}
+		
+		[global::System.Data.Linq.Mapping.ColumnAttribute(Storage="_EndDate", DbType="Date")]
+		public System.Nullable<System.DateTime> EndDate
+		{
+			get
+			{
+				return this._EndDate;
+			}
+			set
+			{
+				if ((this._EndDate != value))
+				{
+					this.OnEndDateChanging(value);
+					this.SendPropertyChanging();
+					this._EndDate = value;
+					this.SendPropertyChanged("EndDate");
+					this.OnEndDateChanged();
+				}
+			}
+		}
+		
+		[global::System.Data.Linq.Mapping.ColumnAttribute(Storage="_TourTime", DbType="NVarChar(MAX)")]
+		public string TourTime
+		{
+			get
+			{
+				return this._TourTime;
+			}
+			set
+			{
+				if ((this._TourTime != value))
+				{
+					this.OnTourTimeChanging(value);
+					this.SendPropertyChanging();
+					this._TourTime = value;
+					this.SendPropertyChanged("TourTime");
+					this.OnTourTimeChanged();
+				}
+			}
+		}
+		
+		[global::System.Data.Linq.Mapping.ColumnAttribute(Storage="_LocationFrom", DbType="NVarChar(MAX)")]
+		public string LocationFrom
+		{
+			get
+			{
+				return this._LocationFrom;
+			}
+			set
+			{
+				if ((this._LocationFrom != value))
+				{
+					this.OnLocationFromChanging(value);
+					this.SendPropertyChanging();
+					this._LocationFrom = value;
+					this.SendPropertyChanged("LocationFrom");
+					this.OnLocationFromChanged();
+				}
+			}
+		}
+		
+		[global::System.Data.Linq.Mapping.ColumnAttribute(Storage="_LocationTo", DbType="NVarChar(MAX)")]
+		public string LocationTo
+		{
+			get
+			{
+				return this._LocationTo;
+			}
+			set
+			{
+				if ((this._LocationTo != value))
+				{
+					this.OnLocationToChanging(value);
+					this.SendPropertyChanging();
+					this._LocationTo = value;
+					this.SendPropertyChanged("LocationTo");
+					this.OnLocationToChanged();
+				}
+			}
+		}
+		
+		[global::System.Data.Linq.Mapping.ColumnAttribute(Storage="_Price", DbType="Float")]
+		public System.Nullable<double> Price
+		{
+			get
+			{
+				return this._Price;
+			}
+			set
+			{
+				if ((this._Price != value))
+				{
+					this.OnPriceChanging(value);
+					this.SendPropertyChanging();
+					this._Price = value;
+					this.SendPropertyChanged("Price");
+					this.OnPriceChanged();
+				}
+			}
+		}
+		
+		[global::System.Data.Linq.Mapping.ColumnAttribute(Storage="_Poster", DbType="NVarChar(MAX)")]
+		public string Poster
+		{
+			get
+			{
+				return this._Poster;
+			}
+			set
+			{
+				if ((this._Poster != value))
+				{
+					this.OnPosterChanging(value);
+					this.SendPropertyChanging();
+					this._Poster = value;
+					this.SendPropertyChanged("Poster");
+					this.OnPosterChanged();
+				}
+			}
+		}
+		
+		[global::System.Data.Linq.Mapping.ColumnAttribute(Storage="_Descrip", DbType="NVarChar(MAX)")]
+		public string Descrip
+		{
+			get
+			{
+				return this._Descrip;
+			}
+			set
+			{
+				if ((this._Descrip != value))
+				{
+					this.OnDescripChanging(value);
+					this.SendPropertyChanging();
+					this._Descrip = value;
+					this.SendPropertyChanged("Descrip");
+					this.OnDescripChanged();
+				}
+			}
+		}
+		
+		[global::System.Data.Linq.Mapping.ColumnAttribute(Storage="_VehicleId", DbType="Int")]
+		public System.Nullable<int> VehicleId
+		{
+			get
+			{
+				return this._VehicleId;
+			}
+			set
+			{
+				if ((this._VehicleId != value))
+				{
+					this.OnVehicleIdChanging(value);
+					this.SendPropertyChanging();
+					this._VehicleId = value;
+					this.SendPropertyChanged("VehicleId");
+					this.OnVehicleIdChanged();
 				}
 			}
 		}

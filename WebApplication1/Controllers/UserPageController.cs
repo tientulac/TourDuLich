@@ -55,7 +55,7 @@ namespace WebApplication1.Controllers
             return Json(new { success = true }, JsonRequestBehavior.AllowGet);
         }
 
-        public ActionResult ListTour(string tourName = "", DateTime? startDate = null, DateTime? endDate = null, string priceOrder = "", string locationFrom = "", string locationTo = "", string vehicleName = "")
+        public ActionResult ListTour(string tourName = "", DateTime? startDate = null, DateTime? endDate = null, string priceOrder = "", string locationFrom = "", string locationTo = "", string vehicleName = "", double startPrice = 0, double endPrice = 0)
         {
             var lstTour = (from a in db.Tours
                            select new TourDTO
@@ -109,7 +109,14 @@ namespace WebApplication1.Controllers
             {
                 lstTour = lstTour.Where(x => x.EndDate <= endDate);
             }
-
+            if (startPrice > 0)
+            {
+                lstTour = lstTour.Where(x => x.Price >= startPrice);
+            }
+            if (endPrice > 0)
+            {
+                lstTour = lstTour.Where(x => x.Price <= endPrice);
+            }
             ViewBag.ListTour = lstTour.ToList();
             return View();
         }
@@ -196,7 +203,7 @@ namespace WebApplication1.Controllers
         public ActionResult ListTicket(int account_id)
         {
             var ma = db.Customers.Where(x => x.AccountId == account_id).FirstOrDefault().CustomerId;
-            ViewBag.ListTicket = db.Orders.ToList() ?? null;
+            ViewBag.ListTicket = db.Orders.Where(x => x.CustomerId == ma).ToList() ?? null;
             ViewBag.Customer = db.Customers.Where(x => x.AccountId == account_id).FirstOrDefault() ?? null;
             ViewBag.Balance = db.Accounts.Where(x => x.AccountId == account_id).FirstOrDefault().Balance ?? 0;
             return View();
@@ -229,9 +236,33 @@ namespace WebApplication1.Controllers
                     db.SubmitChanges();
                     return Json(new { success = true }, JsonRequestBehavior.AllowGet);
                 }
+                else if (_order.CreatedAt.GetValueOrDefault().AddDays(5) > DateTime.Now)
+                {
+                    var customerId = _order.CustomerId;
+                    var acc_id = db.Customers.Where(x => x.CustomerId == customerId).FirstOrDefault().AccountId;
+                    var tk = db.Accounts.Where(x => x.AccountId == acc_id).FirstOrDefault();
+                    tk.Balance = tk.Balance > 0 ? tk.Balance : 0;
+                    tk.Balance += (_order.TotalPrice.GetValueOrDefault() * 0.7);
+                    _order.Status = 2;
+                    _order.DeletedAt = DateTime.Now;
+                    db.SubmitChanges();
+                    return Json(new { success = true }, JsonRequestBehavior.AllowGet);
+                }
+                else if (_order.CreatedAt.GetValueOrDefault().AddDays(8) > DateTime.Now)
+                {
+                    var customerId = _order.CustomerId;
+                    var acc_id = db.Customers.Where(x => x.CustomerId == customerId).FirstOrDefault().AccountId;
+                    var tk = db.Accounts.Where(x => x.AccountId == acc_id).FirstOrDefault();
+                    tk.Balance = tk.Balance > 0 ? tk.Balance : 0;
+                    tk.Balance += _order.TotalPrice/2;
+                    _order.Status = 2;
+                    _order.DeletedAt = DateTime.Now;
+                    db.SubmitChanges();
+                    return Json(new { success = true }, JsonRequestBehavior.AllowGet);
+                }
                 else
                 {
-                    return Json(new { success = false, message = "Bạn chỉ có thể hủy tour trong vòng 3 ngày từ lúc đặt vé." }, JsonRequestBehavior.AllowGet);
+                    return Json(new { success = false, message = "Bạn chỉ có thể hủy tour trong vòng 8 ngày từ lúc đặt vé." }, JsonRequestBehavior.AllowGet);
                 }
             }
             catch (Exception ex)

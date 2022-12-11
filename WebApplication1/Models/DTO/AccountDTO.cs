@@ -14,6 +14,6 @@ namespace WebApplication1.Models.DTO
         public int AccountType { get; set; }
         public bool Admin { get; set; }
         public bool Active { get; set; }
-        public decimal Balance { get; set; }
+        public double Balance { get; set; }
     }
 }

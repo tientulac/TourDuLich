@@ -21,13 +21,21 @@
                     <label style="font-weight: bold">Tên tour</label>
                     <input class="form-control" type="text" id="TourName" value="" placeholder="Tên tour" />
                 </div>
+                @*<div class="col-md-2">
+                        <label style="font-weight: bold">Ngày bắt đầu</label>
+                        <input class="form-control" type="date" id="StartDate" value="" />
+                    </div>
+                    <div class="col-md-2">
+                        <label style="font-weight: bold">Ngày kết thúc</label>
+                        <input class="form-control" type="date" id="EndDate" value="" />
+                    </div>*@
                 <div class="col-md-2">
-                    <label style="font-weight: bold">Ngày bắt đầu</label>
-                    <input class="form-control" type="date" id="StartDate" value="" />
+                    <label style="font-weight: bold">Giá tối thiểu</label>
+                    <input class="form-control" type="number" id="StartPrice" value="" />
                 </div>
                 <div class="col-md-2">
-                    <label style="font-weight: bold">Ngày kết thúc</label>
-                    <input class="form-control" type="date" id="EndDate" value="" />
+                    <label style="font-weight: bold">Giá tối đa</label>
+                    <input class="form-control" type="number" id="EndPrice" value="" />
                 </div>
                 <div class="col-md-4">
                     <label style="font-weight: bold">Giá</label>
@@ -46,10 +54,14 @@
                     <label style="font-weight: bold">Điểm đến</label>
                     <input class="form-control" type="text" id="LocationTo" value="" placeholder="Điểm đến" />
                 </div>
+                <div class="col-md-4">
+                    <label style="font-weight: bold">Ngày bắt đầu</label>
+                    <input class="form-control" type="date" id="StartDate" value="" />
+                </div>
                 @*<div style="margin-top: 10px;" class="col-md-4">
-                    <label style="font-weight: bold">Phương tiện di chuyển</label>
-                    <input class="form-control" type="text" id="VehicleName" value="" placeholder="Điểm đến" />
-                </div>*@
+                        <label style="font-weight: bold">Phương tiện di chuyển</label>
+                        <input class="form-control" type="text" id="VehicleName" value="" placeholder="Điểm đến" />
+                    </div>*@
 
             </div>
         </div>
@@ -106,7 +118,9 @@
         var priceOrder = $('#PriceOrder').val();
         var locationFrom = $('#LocationFrom').val();
         var locationTo = $('#LocationTo').val();
+        var startPrice = $('#StartPrice').val();
+        var endPrice = $('#EndPrice').val();
         //var _vehicleName = $('VehicleName').val();
-        window.location.href = `../UserPage/ListTour?tourName=${tourName}&startDate=${startDate}&endDate=${endDate}&priceOrder=${priceOrder}&locationFrom=${locationFrom}&locationTo=${locationTo}`;
+        window.location.href = `../UserPage/ListTour?tourName=${tourName}&startDate=${startDate}&endDate=${endDate}&priceOrder=${priceOrder}&locationFrom=${locationFrom}&locationTo=${locationTo}&startPrice=${startPrice}&endPrice=${endPrice}`;
     }
 </script>

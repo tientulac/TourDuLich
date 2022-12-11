@@ -219,7 +219,7 @@
                             </select>
                             <div class="form-group col-md-12">
                                 <label class="required" for="inputEmail4">Nhập mã thẻ</label>
-                                <input type="number" class="form-control contact-method" id="Tentram" placeholder="Nhập mã">
+                                <input type="number" class="form-control contact-method" id="mathe" placeholder="Nhập mã">
                             </div>
                         </div>
                     </form>
@@ -278,20 +278,25 @@
     }
 
     submit = () => {
-        $.ajax({
-            url: '/UserPage/NapTien?id_tk=' + id_kh,
-            type: 'GET',
-            success: function (result) {
-                if (result.success) {
-                    toastr.warning('Successfully !');
-                    window.location.reload();
+        if (!($('#mathe').val().length == 11)) {
+            toastr.warning('Mã thẻ phải có 11 ký tự !');
+        }
+        else {
+            $.ajax({
+                url: '/UserPage/NapTien?id_tk=' + id_kh,
+                type: 'GET',
+                success: function (result) {
+                    if (result.success) {
+                        toastr.warning('Successfully !');
+                        window.location.reload();
+                    }
+                    else {
+                        toastr.warning('Failed !');
+                        $('.modal').modal('hide');
+                    }
                 }
-                else {
-                    toastr.warning('Failed !');
-                    $('.modal').modal('hide');
-                }
-            }
-        });
+            });
+        }
     }
 
     deleteItem = () => {
